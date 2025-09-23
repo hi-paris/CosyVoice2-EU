@@ -1,0 +1,21 @@
+\begin{table}[htbp!]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+Component & WER$\downarrow$ & SECS$\uparrow$ & MCD$\downarrow$ \\n+\midrule
+pretrained & 53.16 ± 27.50 & 0.23 ± 0.11 & 8.39 ± 0.60 \
++flow+only & 51.72 ± 25.86 & 0.24 ± 0.10 & 8.63 ± 0.61 \
++hifigan+only & 51.53 ± 23.70 & 0.15 ± 0.10 & 9.67 ± 0.80 \
++flow+hifigan & 49.67 ± 24.93 & 0.16 ± 0.10 & 9.93 ± 0.84 \
++llm+only & 10.48 ± 14.95 & 0.30 ± 0.12 & 7.80 ± 0.56 \
++llm+hifigan & 9.76 ± 13.67 & 0.24 ± 0.11 & 8.60 ± 0.72 \
++llm+flow & 9.67 ± 15.68 & 0.31 ± 0.11 & 7.76 ± 0.55 \
++full+finetuned & 8.77 ± 15.57 & 0.24 ± 0.10 & 8.58 ± 0.65 \
++\bottomrule
+\end{tabular}
+}
+
+\caption{Component ablation at best hour (250h) for FR. Primary metric = wer\\_norm. Lower is better except SECS.}
+\label{tab:rq1-ablation-fr}\n\end{table}

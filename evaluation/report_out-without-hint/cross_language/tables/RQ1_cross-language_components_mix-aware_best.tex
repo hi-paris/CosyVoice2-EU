@@ -1,0 +1,46 @@
+\begin{table}[htbp!]
+\centering
+\small
+\begin{threeparttable}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\linewidth}{!}{%
+\sisetup{detect-weight=true,detect-inline-weight=math,round-mode=places,round-precision=2}
+\begin{tabular}{cccSSSSSSccc}
+\toprule
+ & & & \multicolumn{3}{c}{FR (mono)} & \multicolumn{3}{c}{DE (mono)} & \multicolumn{3}{c}{FR+DE (mix)} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}
+\multicolumn{1}{c}{LLM} & \multicolumn{1}{c}{Flow} & \multicolumn{1}{c}{Voc.} & \multicolumn{1}{c}{WER$\downarrow$} & \multicolumn{1}{c}{SECS$\uparrow$} & \multicolumn{1}{c}{MCD$\downarrow$} & \multicolumn{1}{c}{WER$\downarrow$} & \multicolumn{1}{c}{SECS$\uparrow$} & \multicolumn{1}{c}{MCD$\downarrow$} & \multicolumn{1}{c}{WER$\downarrow$} & \multicolumn{1}{c}{SECS$\uparrow$} & \multicolumn{1}{c}{MCD$\downarrow$} \\
+\midrule
+\circ & \circ & \ominus & 53.16 & 0.23 & 8.39 & 66.45 & 0.19 & 8.12 & 52.74/73.49 & 0.23/0.19 & 8.44/8.09 \\
+\rowcolor[gray]{0.9} \circ & \circ & \circ & 51.53 & 0.15 & 9.67 & 66.77 & 0.14 & 8.85 & 49.59/68.44 & 0.15/0.13 & 9.68/8.84 \\
+\circ & \oplus & \ominus & 51.72 & 0.24 & 8.63 & 65.16 & 0.21 & 8.22 & 51.62/65.02 & 0.26/0.24 & 8.50/8.38 \\
+\circ & \oplus & \circ & 49.67 & 0.16 & 9.93 & 62.97 & 0.18 & 8.98 & 52.98/62.36 & 0.24/0.22 & 9.61/9.26 \\
+\oplus & \oplus & \ominus & 9.67 & \textbf{0.31} & \textbf{7.76} & 6.56 & \textbf{0.27} & \textbf{7.39} & 10.18/8.11 & \textbf{0.33}/\textbf{0.30} & \textbf{7.58}/7.68 \\
+\oplus & \circ & \ominus & 10.48 & 0.30 & 7.80 & 7.41 & 0.25 & 7.44 & 10.85/7.17 & 0.29/0.26 & 7.72/\textbf{7.39} \\
+\oplus & \circ & \circ & 9.76 & 0.24 & 8.60 & 7.28 & 0.21 & 7.80 & 10.45/7.38 & 0.22/0.22 & 8.53/7.80 \\
+\rowcolor[gray]{0.9} \oplus & \oplus & \circ & \textbf{8.77} & 0.24 & 8.58 & \textbf{6.03} & 0.25 & 7.75 & \textbf{9.03}/\textbf{6.42} & 0.31/0.28 & 8.28/8.08 \\
+\midrule
+\addlinespace
+\multicolumn{3}{r}{\footnotesize\textbf{$\Delta$ vs baseline}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+83\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+62\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+11\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+91\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+85\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{+12\%}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{\text{+82\%}/\text{+91\%}}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{\text{+104\%}/\text{+113\%}}} &
+\multicolumn{1}{c}{\textcolor{mildgreen}{\text{+14\%}/\text{+9\%}}}
+\\
+\bottomrule
+\end{tabular}
+}% end resizebox
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item \textbf{Symbols:} $\circ$ original CosyVoice2 (unaltered); $\ominus$ partially trained; $\oplus$ fine-tuned for French and German.
+\item \textbf{Shading:} gray rows mark the original CosyVoice2 baseline and our fully fine-tuned model.
+\end{tablenotes}
+\caption{Cross-language component table at each group's best hour: FR/DE (mono) use their own best hours; FR+DE (mix) uses the mix model's best hour. Mix values are shown as FR/DE.}
+\label{tab:rq1-cross-language-mixaware}
+\end{threeparttable}
+\end{table}

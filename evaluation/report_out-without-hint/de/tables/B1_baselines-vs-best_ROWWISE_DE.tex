@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+System & WER$\downarrow$ & SECS$\uparrow$ & MCD$\downarrow$ & F0 RMSE$\downarrow$ & F0 Corr$\uparrow$ & V/UV$\downarrow$ \
+\midrule
+XTTS2 & 7.37 ± 22.54 & 0.23 ± 0.10 & 7.45 ± 0.83 & 53.69 ± 43.92 & 0.47 ± 0.38 & 48.68 ± 8.29 \
+\midrule
+Ours (anchored) & 6.03 ± 12.38 (-1.34) & 0.25 ± 0.09 (+0.02) & 7.75 ± 0.87 (+0.30) & 48.67 ± 41.54 (-5.01) & 0.53 ± 0.35 (+0.05) & 42.97 ± 7.97 (-5.71) \
+ElevenLabs & 3.98 ± 9.26 & 0.29 ± 0.10 & 7.96 ± 1.23 & 46.93 ± 40.10 & 0.55 ± 0.34 & 44.79 ± 9.24 \
+\midrule
+Ours (anchored) & 6.03 ± 12.38 (+2.05) & 0.25 ± 0.09 (-0.04) & 7.75 ± 0.87 (-0.21) & 48.67 ± 41.54 (+1.75) & 0.53 ± 0.35 (-0.02) & 42.97 ± 7.97 (-1.82) \
+Fish Speech & 8.33 ± 14.18 & 0.17 ± 0.09 & 7.50 ± 0.96 & 49.44 ± 42.07 & 0.54 ± 0.36 & 44.57 ± 8.25 \
+\midrule
+Ours (anchored) & 6.03 ± 12.38 (-2.30) & 0.25 ± 0.09 (+0.08) & 7.75 ± 0.87 (+0.25) & 48.67 ± 41.54 (-0.77) & 0.53 ± 0.35 (-0.01) & 42.97 ± 7.97 (-1.60) \
+CosyVoice2 (orig.) & 65.87 ± 54.56 & 0.14 ± 0.10 & 8.83 ± 0.88 & 44.15 ± 34.75 & 0.50 ± 0.35 & 46.96 ± 8.18 \
+\midrule
+Ours (anchored) & 6.03 ± 12.38 (-59.83) & 0.25 ± 0.09 (+0.12) & 7.75 ± 0.87 (-1.08) & 48.67 ± 41.54 (+4.52) & 0.53 ± 0.35 (+0.02) & 42.97 ± 7.97 (-4.00) \
+\bottomrule
+\end{tabular}
+}
+\caption{Baselines vs Ours for DE. Ours is evaluated at the RQ1 anchor 500h (mono); each baseline is evaluated at its own best hour. Deltas in parentheses are (Ours − Baseline); negative favors Ours for error-type metrics. WER is normalized.}
+\label{tab:baseline-vs-best-rowwise-de}
+\end{table}

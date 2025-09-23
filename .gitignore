@@ -1,0 +1,50 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+data/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# data
+dataset/data/
+
+# modules
+ffmpeg-bin
+
+# benchmarks
+benchmarks/
+benchmarks/CoquiTTS/.venv-coqui/
+benchmarks/OpenVoice/.venv-openvoice/
+benchmarks/chatterbox/.venv-chatterbox/
+benchmarks/Orpheus-TTS/.venv-orpheus/
+benchmarks/example_luka.wav
+Coqui_XTTS_repo/
+
+# CosyVoice
+cosy_repo/examples/libritts/cosyvoice2/exp/
+cosy_repo/examples/libritts/cosyvoice2/tensorboard/
+cosy_repo/pretrained_models/
+
+!cosy_repo/audio_output/
+cosy_repo/audio_output/*
+!cosy_repo/audio_output/demo/
+
+pretrained_models/
+
+cosy_repo/examples/libritts/cosyvoice2/logs/
+evaluation/logs/
+evaluation/*mos*
+evaluation/audio_pairs/
+evaluation/audio_pairs_old/
+
+.env
+
+evaluation/cosyvoice2-demo/

@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: >-
+  If you use CosyVoice2‑EU in your research or products, please cite this
+  software and the accompanying manuscript when available.
+title: CosyVoice2‑EU: Europeanized CosyVoice2 for French & German Zero‑Shot TTS
+type: software
+authors:
+  - family-names: Horstmann
+    given-names: Tim Luka
+  - family-names: Ould Ouali
+    given-names: Nassima
+  - family-names: Arous
+    given-names: Mohamed Amine
+  - family-names: Hussain Sani
+    given-names: Awais
+  - family-names: Moulines
+    given-names: Eric
+repository-code: https://huggingface.co/Luka512/CosyVoice2-0.5B-EU
+url: https://horstmann.tech/cosyvoice2-demo/
+abstract: >-
+  High‑quality FR/DE zero‑shot text‑to‑speech built on CosyVoice2, with bilingual
+  adaptation, streaming inference, and a simple CLI via the PyPI package
+  "cosyvoice2-eu". This repo also contains evaluation scripts for reproducible
+  benchmarking vs. common open‑source baselines.
+keywords:
+  - text-to-speech
+  - tts
+  - voice cloning
+  - cosyvoice2
+  - french
+  - german
+preferred-citation:
+  type: manuscript
+  title: Europeanizing CosyVoice2 — Data‑Efficient Adaptation for French and German Zero‑Shot TTS
+  authors:
+    - family-names: Horstmann
+      given-names: Tim Luka
+    - family-names: Ould Ouali
+      given-names: Nassima
+    - family-names: Arous
+      given-names: Mohamed Amine
+    - family-names: Hussain Sani
+      given-names: Awais
+    - family-names: Moulines
+      given-names: Eric
+  year: 2025
+  notes: Preprint in preparation.

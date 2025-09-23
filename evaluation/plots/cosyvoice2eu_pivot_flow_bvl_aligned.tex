@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{0.95}
+\caption{FLOW: best validation loss (BVL) with training loss at that checkpoint.}
+\label{tab:cosy_flow_bvl_aligned}
+\begin{threeparttable}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrr}
+\toprule
+{} & \multicolumn{2}{c}{FR} & \multicolumn{2}{c}{DE} & \multicolumn{2}{c}{MIX} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+{} &             BVL & TrL@BVL &             BVL & TrL@BVL &             BVL & TrL@BVL \\
+Hours &                 &         &                 &         &                 &         \\
+\midrule
+50    &           0.398 &   0.126 &           0.397 &   0.194 &           0.338 &   0.146 \\
+100   &           0.345 &   0.146 &           0.350 &   0.195 &           0.413 &   0.188 \\
+250   &           0.347 &   0.123 &           0.380 &   0.118 &           0.343 &   0.095 \\
+500   &  \textbf{0.265} &   0.117 &  \textbf{0.296} &   0.144 &           0.305 &   0.111 \\
+1000  &           0.346 &   0.202 &           0.415 &   0.103 &           0.395 &   0.143 \\
+1500  &           0.330 &   0.119 &           0.346 &   0.106 &  \textbf{0.225} &   0.139 \\
+\bottomrule
+\end{tabular}
+}
+\begin{minipage}{\linewidth}
+\begin{tablenotes}[para,flushleft]
+\footnotesize \textit{Abbrev.:} BVL = Best Validation Loss (minimum over training); TrL@BVL/TrA@BVL = training loss/accuracy at the BVL step (from W\&B history). \textit{Selection:} final models are the average of the 5 checkpoints with the lowest validation loss. \textit{Emphasis:} bold = per-language best across hours (min BVL, max TrA@BVL).
+\end{tablenotes}
+\end{minipage}
+\end{threeparttable}
+\end{table}

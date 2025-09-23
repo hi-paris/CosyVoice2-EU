@@ -1,0 +1,41 @@
+This repository includes or interacts with third‑party components.
+
+1) CosyVoice2 (FunAudioLLM)
+   - Location: cosy_repo/
+   - Upstream: https://github.com/FunAudioLLM/CosyVoice
+   - License: Apache License 2.0 (see cosy_repo/LICENSE)
+   - Notes: CosyVoice2 code and assets in cosy_repo/ remain under their original license.
+
+2) Coqui TTS (XTTS2)
+   - Location: Coqui_XTTS_repo/
+   - Upstream: https://github.com/coqui-ai/TTS
+   - License: Mozilla Public License 2.0 (see Coqui_XTTS_repo/LICENSE.txt)
+   - Notes: Included for evaluation/comparison purposes; licensing remains MPL‑2.0.
+
+3) Packaging (PyPI CLI)
+   - Location: standalone_infer/
+   - Package: cosyvoice2-eu (https://pypi.org/project/cosyvoice2-eu/)
+   - License: Apache License 2.0 (see standalone_infer/LICENSE)
+
+4) Fish‑Speech / OpenAudio S1‑mini
+   - Location: evaluation integration (no vendored source)
+   - Upstream: https://github.com/fishaudio/fish-speech
+   - License: See upstream repository
+   - Notes: Used as a baseline in evaluation; any use is subject to its upstream license.
+
+5) Datasets (used, not redistributed)
+   - Multilingual LibriSpeech (MLS)
+     • Upstream: https://huggingface.co/datasets/facebook/multilingual_librispeech
+     • Notes: Used to construct FR/DE training splits; see upstream license/terms.
+   - LAION “LAION’s Got Talent” annotations (aka EmoNet processing)
+     • Upstream: https://huggingface.co/datasets/laion/laions_got_talent_enhanced_flash_annotations_and_long_captions
+     • Notes: Used to derive expressive FR/DE data; see upstream license/terms.
+   - M‑AILABS Speech Dataset
+     • Upstream: https://github.com/imdatceleste/m-ailabs-dataset
+     • Notes: Used for out‑of‑domain evaluation; see upstream license/terms.
+   - Mozilla Common Voice
+     • Upstream: https://commonvoice.mozilla.org • HF: https://huggingface.co/datasets/mozilla-foundation/common_voice_19_0
+     • Notes: Used for prompt references; see upstream license/terms.
+
+Unless otherwise noted, original code in this repository is licensed under
+the Apache License 2.0 (see LICENSE).

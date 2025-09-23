@@ -1,0 +1,130 @@
+# CosyVoice2 Evaluation Configuration
+
+language: "de"  # override via --language
+hours_to_evaluate: [50,100,250]  # override via --hours
+use_mixed_model: True # indicates if the mixed models, i.e. models trained on both French and German should be used
+run_baselines: False # (rather run independenlty) if True, run baseline TTS models (Orpheus, CoquiTTS) for comparison
+
+# Dataset paths
+dataset:
+  testset_root: "/tsi/hi-paris/tts/Luka/data/tts_testset"
+  splits: ["test"]
+  max_samples_per_split: None
+  
+# Inference settings
+inference:
+  # Support language-specific prompts
+  prompt_audio:
+    fr: "/home/infres/horstmann-24/TTS2/cosy_repo/prompt_audio/common_voice_fr_40952142.wav"
+    de: "/home/infres/horstmann-24/TTS2/cosy_repo/prompt_audio/common_voice_de_41123857.wav"
+    default: "/home/infres/horstmann-24/TTS2/cosy_repo/prompt_audio/common_voice_fr_40952142.wav"
+  backbone: "blanken" # can be "blanken" | "hf:<repo>" | "local:/abs/or/relative/path"#  "hf:Qwen/Qwen2.5-0.5B", "hf:Qwen/Qwen3-0.6B", "hf:utter-project/EuroLLM-1.7B-Instruct"
+  method: "cross_lingual"  # "cross_lingual", "zero_shot", "instruct2"
+  speed: 1.0
+  text_frontend: false  # Updated to match your inference notebook setting
+  batch_size: 8  # number of samples to process in parallel (used as workers if not set separately)
+  # Optional evaluation-only improvements
+  prompt_text: ""        # if set with zero_shot_spk_id, caches prompt features once
+  zero_shot_spk_id: ""   # e.g., "eval_cached_prompt"
+
+# Campplus model path
+campplus:
+  model_path: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B/campplus.onnx"
+  
+# Metrics to compute
+metrics:
+  mcd: true      # Mel-Cepstral Distortion (lower is better) --> measures the spectral distortion between the reference and synthesized audio
+  wer: true      # Word Error Rate (Whisper transcription) (lower is better) --> evaluates the transcription accuracy of the synthesized speech
+  secs: true     # Speaker similarity (higher is better) --> assesses the similarity between the reference and synthesized speaker voices
+  gpe: true      # Gross Pitch Error (lower is better) --> quantifies the pitch accuracy of the synthesized speech
+
+# Output settings
+output:
+  results_dir: "/tsi/hi-paris/tts/Luka/evaluation-without-hint/results"
+  synth_dir: "/tsi/hi-paris/tts/Luka/evaluation-without-hint/synthesis_output"
+  save_audio: true
+  generate_report: true
+
+# System settings
+system:
+  device: "cuda"
+  fp16: false
+  num_workers: 4
+  verbose: true
+  HF_HOME: '/tsi/hi-paris/tts/Luka/models/'
+
+# Baseline models settings
+baselines:
+  models: ["coqui"]  # available baseline models: coqui | openvoice
+  max_samples: None   # limit samples for baselines
+  batch_size: 1      # process samples sequentially
+  openvoice:
+    ckpt_converter: "/tsi/hi-paris/tts/Luka/models/OpenVoice/checkpoints_v2/converter"  # path containing config.json & checkpoint.pth
+    # reference_speaker omitted -> automatically uses inference.prompt_audio[language]
+    gemini_model: "gemini-2.5-flash-preview-tts"
+    base_voice: "Kore"  # Gemini prebuilt voice name
+    # Alternative: specify OPENVOICE_CKPT instead of ckpt_converter, or rely on .env OPENVOICE_CKPT
+    # OPENVOICE_CKPT: "/path/to/checkpoints_v2/converter"
+    env_file: "/home/infres/horstmann-24/TTS2/.env"  # loads GOOGLE_API_KEY and optionally OPENVOICE_CKPT
+    prompt_prefix_map:
+      fr: "Speak in French:"
+      de: "Sprich auf Deutsch:"
+      en: "Speak in English:"
+  elevenlabs:
+    # Either set api_key here OR (recommended) export ELEVEN_API_KEY / ELEVENLABS_API_KEY env var or provide env_file
+    api_key: ""  # leave empty to rely on environment variable
+    env_file: "/home/infres/horstmann-24/TTS2/.env"  # optional .env containing ELEVEN_API_KEY
+    model_id: "eleven_turbo_v2"  # low-cost fast multilingual model
+    voice_ids:
+      fr: "KigFS2WzigcPtcGhtg8g"
+      de: "kSvpvmp7eAQovKvf1w4K"
+      default: "KigFS2WzigcPtcGhtg8g"
+
+
+
+######################## MODEL CONFIGURATIONS ########################
+# llm and flow models will be auto-resolved to {hours}-averaged-{backbone}
+
+models:
+  pretrained:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "original"
+    hifigan_run_id: "original"
+  
+  llm_only:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "llm"
+    hifigan_run_id: "original"
+  
+  flow_only:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "flow"
+    hifigan_run_id: "original"
+    
+  
+  hifigan_only:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "hifigan"
+    hifigan_run_id: "original-real"
+    
+  
+  llm_flow:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "llm_flow"
+    hifigan_run_id: "original"
+    
+
+  llm_hifigan:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "llm_hifigan"
+    hifigan_run_id: "original-real"
+
+  flow_hifigan:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "flow_hifigan"
+    hifigan_run_id: "original-real"
+
+  full_finetuned:
+    model_dir: "/home/infres/horstmann-24/TTS2/cosy_repo/pretrained_models/CosyVoice2-0.5B"
+    setting: "llm_flow_hifigan"
+    hifigan_run_id: "original-real"  # fine-tuned hifigan

@@ -1,0 +1,20 @@
+\begin{table}[htbp!]
+\centering
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Component & Hours & Wins (mix) & Losses & Ties & Mean ΔPrimary (mix−mono) \\
+\midrule
+flow+hifigan & 6 & 3 & 3 & 0 & -2.034 \\
+flow+only & 6 & 4 & 2 & 0 & +0.510 \\
+full+finetuned & 6 & 3 & 3 & 0 & +0.446 \\
+hifigan+only & 6 & 3 & 3 & 0 & +0.746 \\
+llm+flow & 6 & 1 & 5 & 0 & +0.353 \\
+llm+hifigan & 6 & 3 & 3 & 0 & +0.582 \\
+llm+only & 6 & 3 & 3 & 0 & +0.667 \\
+pretrained & 6 & 2 & 4 & 0 & +0.995 \\
+\bottomrule
+\end{tabular}
+\caption{Mix vs mono wins/losses by component for DE. Negative ΔPrimary favors mix (WER-like).}
+\label{tab:mix-vs-mono-winloss-de}
+\end{table}

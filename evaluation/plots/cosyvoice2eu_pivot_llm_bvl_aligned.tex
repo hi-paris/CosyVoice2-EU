@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\small
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{0.95}
+\caption{LLM: best validation loss (BVL) with training metrics at that checkpoint.}
+\label{tab:cosy_llm_bvl_aligned}
+\begin{threeparttable}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{rrrrrrrrrr}
+\toprule
+{} & \multicolumn{3}{c}{FR} & \multicolumn{3}{c}{DE} & \multicolumn{3}{c}{MIX} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+{} &             BVL & TrL@BVL &         TrA@BVL &             BVL & TrL@BVL &         TrA@BVL &             BVL & TrL@BVL &         TrA@BVL \\
+Hours &                 &         &                 &                 &         &                 &                 &         &                 \\
+\midrule
+50    &           3.871 &   0.794 &           0.257 &           4.025 &   0.902 &           0.193 &           2.981 &   0.814 &           0.303 \\
+100   &           3.266 &   0.764 &           0.314 &           3.668 &   0.726 &  \textbf{0.330} &           2.960 &   0.733 &  \textbf{0.311} \\
+250   &           3.145 &   0.725 &  \textbf{0.318} &           3.646 &   0.692 &           0.308 &           2.840 &   0.783 &           0.237 \\
+500   &           3.012 &   0.887 &           0.221 &           3.555 &   0.781 &           0.259 &  \textbf{2.739} &   0.751 &           0.264 \\
+1000  &           2.939 &   0.801 &           0.265 &           3.453 &   0.818 &           0.264 &           2.757 &   0.820 &           0.247 \\
+1500  &  \textbf{2.930} &   0.786 &           0.264 &  \textbf{3.390} &   0.850 &           0.208 &           2.789 &   0.769 &           0.307 \\
+\bottomrule
+\end{tabular}
+}
+\begin{minipage}{\linewidth}
+\begin{tablenotes}[para,flushleft]
+\footnotesize \textit{Abbrev.:} BVL = Best Validation Loss (minimum over training); TrL@BVL/TrA@BVL = training loss/accuracy at the BVL step (from W\&B history). \textit{Selection:} final models are the average of the 5 checkpoints with the lowest validation loss. \textit{Emphasis:} bold = per-language best across hours (min BVL, max TrA@BVL).
+\end{tablenotes}
+\end{minipage}
+\end{threeparttable}
+\end{table}

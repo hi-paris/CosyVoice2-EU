@@ -1,0 +1,18 @@
+This package includes or redistributes third‑party components:
+
+1) CosyVoice / CosyVoice2 (FunAudioLLM)
+   - Upstream: https://github.com/FunAudioLLM/CosyVoice
+   - License: Apache License 2.0
+   - Notes: Portions of the CosyVoice runtime are bundled for inference. The
+            original license applies to those components. See
+            THIRD_PARTY_LICENSES/COSYVOICE_LICENSE.
+
+2) Matcha‑TTS (Shivam Mehta)
+   - Upstream: https://github.com/shivammehta25/Matcha-TTS
+   - License: MIT
+   - Notes: Bundled modules and HiFi‑GAN components are included. See
+            THIRD_PARTY_LICENSES/MATCHA_TTS_LICENSE and
+            THIRD_PARTY_LICENSES/MATCHA_HIFIGAN_LICENSE.
+
+Unless otherwise noted, original code in this package is licensed under the
+Apache License 2.0 (see LICENSE).
