@@ -5,7 +5,6 @@
 <p align="center">
   <a href="https://pypi.org/project/cosyvoice2-eu/"><img src="https://img.shields.io/pypi/v/cosyvoice2-eu.svg?label=PyPI&color=%23009966" alt="PyPI"></a>
   <a href="https://huggingface.co/Luka512/CosyVoice2-0.5B-EU"><img src="https://img.shields.io/badge/HuggingFace-CosyVoice2--0.5B--EU-ffcc00?logo=huggingface" alt="HF"></a>
-  <a href="https://horstmann.tech/cosyvoice2-demo/"><img src="https://img.shields.io/badge/Demo-Online-brightgreen" alt="Demo"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License"></a>
 </p>
 
