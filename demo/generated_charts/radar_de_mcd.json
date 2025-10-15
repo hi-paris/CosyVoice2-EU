@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned",
+    "Llm Only",
+    "Flow Only",
+    "Llm Flow",
+    "Pretrained"
+  ],
+  "datasets": [
+    {
+      "label": "MCD (absolute values)",
+      "data": [
+        8.8081,
+        7.7411,
+        8.8557,
+        7.7483,
+        7.336,
+        8.2137,
+        7.3863,
+        8.0671
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "MCD",
+  "min": 7.184,
+  "max": 9.0077
+}

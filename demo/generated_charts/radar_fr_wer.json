@@ -1,0 +1,23 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned"
+  ],
+  "datasets": [
+    {
+      "label": "WER Scores",
+      "data": [
+        61.56561168762441,
+        24.61677523660295,
+        61.947258994939,
+        25.171079739321105
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "WER"
+}

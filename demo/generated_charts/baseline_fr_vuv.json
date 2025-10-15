@@ -1,0 +1,36 @@
+{
+  "labels": [
+    "CosyVoice2 Original",
+    "Coqui XTTS v2",
+    "ElevenLabs",
+    "OpenAudio-S1-mini",
+    "CosyVoice2-EU (ours)"
+  ],
+  "datasets": [
+    {
+      "label": "VUV",
+      "data": [
+        44.58386452048682,
+        47.99621374866969,
+        42.68819242382759,
+        41.23897436873349,
+        42.25838322154784
+      ],
+      "backgroundColor": [
+        "#f093fb",
+        "#f6ad55",
+        "#63b3ed",
+        "#f093fb",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#f093fb",
+        "#f6ad55",
+        "#63b3ed",
+        "#f093fb",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "VUV"
+}

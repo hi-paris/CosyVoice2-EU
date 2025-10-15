@@ -1,0 +1,22 @@
+{
+  "labels": [
+    "Baseline (Original)"
+  ],
+  "datasets": [
+    {
+      "label": "WER",
+      "data": [
+        75.2724196557046
+      ],
+      "backgroundColor": [
+        "#f093fb",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#f093fb",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "WER"
+}

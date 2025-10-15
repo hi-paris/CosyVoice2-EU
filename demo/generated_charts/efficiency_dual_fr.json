@@ -1,0 +1,48 @@
+{
+  "labels": [
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "WER_NORM vs Hours",
+      "data": [
+        8.994651093558486,
+        9.981538455104204,
+        8.77295848603556,
+        9.186623490017714,
+        9.236957720676735,
+        10.684880749787789
+      ],
+      "borderColor": "#e53e3e",
+      "backgroundColor": "#e53e3e20",
+      "tension": 0.35,
+      "fill": false,
+      "yAxisID": "yWER"
+    },
+    {
+      "label": "SECS vs Hours",
+      "data": [
+        0.2968782128684375,
+        0.19194405025171568,
+        0.23981599617049457,
+        0.23550534678533988,
+        0.24245563932836672,
+        0.24063599884992157
+      ],
+      "borderColor": "#2b6cb0",
+      "backgroundColor": "#2b6cb020",
+      "tension": 0.35,
+      "fill": false,
+      "yAxisID": "ySECS"
+    }
+  ],
+  "metric_labels": {
+    "wer": "WER_NORM",
+    "secs": "SECS"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "labels": [
+    "CosyVoice2 Original",
+    "Coqui XTTS v2",
+    "ElevenLabs",
+    "OpenAudio-S1-mini",
+    "CosyVoice2-EU (ours)"
+  ],
+  "datasets": [
+    {
+      "label": "SECS",
+      "data": [
+        0.13668511633616645,
+        0.23132970870172215,
+        0.28920286593834843,
+        0.174596242736722,
+        0.2528884756610531
+      ],
+      "backgroundColor": [
+        "#f093fb",
+        "#f6ad55",
+        "#63b3ed",
+        "#f093fb",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#f093fb",
+        "#f6ad55",
+        "#63b3ed",
+        "#f093fb",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "SECS"
+}

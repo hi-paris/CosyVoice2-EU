@@ -1,0 +1,111 @@
+{
+  "labels": [
+    0,
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "Full Finetuned (Mix)",
+      "data": [
+        null,
+        43.46206623320142,
+        43.473171342701335,
+        44.38106119743304,
+        46.53939454387689,
+        44.92423080877682,
+        45.2163362118214
+      ],
+      "borderColor": "#764ba2",
+      "backgroundColor": "#764ba220",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Full Finetuned (Mono)",
+      "data": [
+        null,
+        42.90831798995273,
+        43.519385592347426,
+        43.88077413976695,
+        42.96597493724641,
+        43.549734959020164,
+        44.44611708550969
+      ],
+      "borderColor": "#764ba2",
+      "backgroundColor": "#764ba220",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Llm Hifigan (Mix)",
+      "data": [
+        null,
+        43.82958331945188,
+        43.79248147705276,
+        43.80957141019436,
+        44.24109662254736,
+        44.09320037551095,
+        44.060235654841584
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Llm Hifigan (Mono)",
+      "data": [
+        null,
+        43.18367544839395,
+        43.62278255625708,
+        43.94161764901965,
+        43.95782337368135,
+        44.83971746672799,
+        45.03292576627479
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Flow Hifigan (Mix)",
+      "data": [
+        null,
+        46.39212885195335,
+        47.35940078723476,
+        46.690489772773354,
+        47.32024296829651,
+        47.01848034887229,
+        47.24331108463238
+      ],
+      "borderColor": "#f6ad55",
+      "backgroundColor": "#f6ad5520",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Flow Hifigan (Mono)",
+      "data": [
+        null,
+        46.729368954885686,
+        46.367637338686855,
+        46.315850910954715,
+        46.213862587102284,
+        46.51446554747153,
+        46.6157301510744
+      ],
+      "borderColor": "#f6ad55",
+      "backgroundColor": "#f6ad5520",
+      "tension": 0.35,
+      "fill": false
+    }
+  ],
+  "metric_label": "VUV",
+  "x_label": "Training Hours"
+}

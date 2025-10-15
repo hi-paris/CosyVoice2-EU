@@ -1,0 +1,29 @@
+{
+  "labels": [
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "Full Finetuned",
+      "data": [
+        8.994651093558486,
+        9.981538455104204,
+        8.77295848603556,
+        9.186623490017714,
+        9.236957720676735,
+        10.684880749787789
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": true
+    }
+  ],
+  "metric_label": "WER_NORM",
+  "x_label": "Training Hours"
+}

@@ -1,0 +1,24 @@
+{
+  "labels": [
+    "Mix Training",
+    "Mono Training"
+  ],
+  "datasets": [
+    {
+      "label": "WER",
+      "data": [
+        27.076506823400116,
+        26.367396418587717
+      ],
+      "backgroundColor": [
+        "#764ba2",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#764ba2",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "WER"
+}

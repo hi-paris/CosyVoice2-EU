@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned",
+    "Llm Only",
+    "Flow Only",
+    "Llm Flow",
+    "Pretrained"
+  ],
+  "datasets": [
+    {
+      "label": "F0_CORR (absolute values)",
+      "data": [
+        0.4857,
+        0.4979,
+        0.5005,
+        0.5258,
+        0.4112,
+        0.4592,
+        0.451,
+        0.4416
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "F0_CORR",
+  "min": 0.3997,
+  "max": 0.5373
+}

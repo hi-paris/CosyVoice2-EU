@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned",
+    "Llm Only",
+    "Flow Only",
+    "Llm Flow",
+    "Pretrained"
+  ],
+  "datasets": [
+    {
+      "label": "WER_NORM (absolute values)",
+      "data": [
+        49.5863,
+        8.758,
+        49.6748,
+        8.773,
+        10.1255,
+        50.9597,
+        9.3491,
+        52.246
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "WER_NORM",
+  "min": 4.4092,
+  "max": 56.5948
+}

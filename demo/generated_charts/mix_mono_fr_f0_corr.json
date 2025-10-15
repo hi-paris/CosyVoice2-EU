@@ -1,0 +1,24 @@
+{
+  "labels": [
+    "Mix Training",
+    "Mono Training"
+  ],
+  "datasets": [
+    {
+      "label": "F0_CORR",
+      "data": [
+        0.6836415802811578,
+        0.680464276229723
+      ],
+      "backgroundColor": [
+        "#764ba2",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#764ba2",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "F0_CORR"
+}

@@ -1,0 +1,24 @@
+{
+  "labels": [
+    "Mix Training",
+    "Mono Training"
+  ],
+  "datasets": [
+    {
+      "label": "SECS",
+      "data": [
+        0.29212980861076565,
+        0.2540559633718025
+      ],
+      "backgroundColor": [
+        "#764ba2",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#764ba2",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "SECS"
+}

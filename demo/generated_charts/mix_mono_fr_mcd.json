@@ -1,0 +1,24 @@
+{
+  "labels": [
+    "Mix Training",
+    "Mono Training"
+  ],
+  "datasets": [
+    {
+      "label": "MCD",
+      "data": [
+        8.314026557690763,
+        8.457594612246176
+      ],
+      "backgroundColor": [
+        "#764ba2",
+        "#667eea"
+      ],
+      "borderColor": [
+        "#764ba2",
+        "#667eea"
+      ]
+    }
+  ],
+  "metric_label": "MCD"
+}

@@ -1,0 +1,29 @@
+{
+  "labels": [
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "Full Finetuned",
+      "data": [
+        39.73669448893402,
+        40.714752777624085,
+        41.10179285037642,
+        42.94303444033534,
+        42.46382654513583,
+        42.2570742877178
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": true
+    }
+  ],
+  "metric_label": "VUV",
+  "x_label": "Training Hours"
+}

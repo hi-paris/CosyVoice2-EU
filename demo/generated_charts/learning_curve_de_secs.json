@@ -1,0 +1,29 @@
+{
+  "labels": [
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "Full Finetuned",
+      "data": [
+        0.27257182642265926,
+        0.28022556161904805,
+        0.30048078087335717,
+        0.31537624433139233,
+        0.29485856143096156,
+        0.2892658769871755
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": true
+    }
+  ],
+  "metric_label": "SECS",
+  "x_label": "Training Hours"
+}

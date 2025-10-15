@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned",
+    "Llm Only",
+    "Flow Only",
+    "Llm Flow",
+    "Pretrained"
+  ],
+  "datasets": [
+    {
+      "label": "VUV (absolute values)",
+      "data": [
+        44.5839,
+        40.0122,
+        44.5409,
+        39.7367,
+        40.384,
+        44.5962,
+        39.9903,
+        44.0233
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "VUV",
+  "min": 39.2507,
+  "max": 45.0822
+}

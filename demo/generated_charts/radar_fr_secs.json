@@ -1,0 +1,33 @@
+{
+  "labels": [
+    "Hifigan Only",
+    "Llm Hifigan",
+    "Flow Hifigan",
+    "Full Finetuned",
+    "Llm Only",
+    "Flow Only",
+    "Llm Flow",
+    "Pretrained"
+  ],
+  "datasets": [
+    {
+      "label": "SECS (absolute values)",
+      "data": [
+        0.1555,
+        0.2399,
+        0.2731,
+        0.3425,
+        0.303,
+        0.2938,
+        0.3531,
+        0.2377
+      ],
+      "borderColor": "#667eea",
+      "backgroundColor": "#667eea20",
+      "pointBackgroundColor": "#667eea"
+    }
+  ],
+  "metric_label": "SECS",
+  "min": 0.1357,
+  "max": 0.3729
+}

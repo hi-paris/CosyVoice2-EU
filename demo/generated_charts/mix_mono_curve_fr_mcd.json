@@ -1,0 +1,111 @@
+{
+  "labels": [
+    0,
+    50,
+    100,
+    250,
+    500,
+    1000,
+    1500
+  ],
+  "datasets": [
+    {
+      "label": "Full Finetuned (Mix)",
+      "data": [
+        null,
+        8.454866051318403,
+        8.281769010653422,
+        8.314403171848513,
+        8.337276657730145,
+        8.338226002583236,
+        8.15761845201086
+      ],
+      "borderColor": "#764ba2",
+      "backgroundColor": "#764ba220",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Full Finetuned (Mono)",
+      "data": [
+        null,
+        8.263440294833174,
+        8.74752626645812,
+        8.584257734642796,
+        8.504343870488677,
+        8.379545738227682,
+        8.266453768826608
+      ],
+      "borderColor": "#764ba2",
+      "backgroundColor": "#764ba220",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Llm Hifigan (Mix)",
+      "data": [
+        null,
+        8.646242268938835,
+        8.526876207935564,
+        8.646194446488204,
+        8.651645917802085,
+        8.570004671860392,
+        8.487926489350452
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Llm Hifigan (Mono)",
+      "data": [
+        null,
+        8.517015441199005,
+        8.601388120874654,
+        8.597565263325727,
+        8.550139766400893,
+        8.667651024801746,
+        8.485809989367452
+      ],
+      "borderColor": "#48bb78",
+      "backgroundColor": "#48bb7820",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Flow Hifigan (Mix)",
+      "data": [
+        null,
+        9.720955413403347,
+        9.613530348938202,
+        9.750829190689865,
+        9.634563158157649,
+        9.710696453959166,
+        9.32229902486737
+      ],
+      "borderColor": "#f6ad55",
+      "backgroundColor": "#f6ad5520",
+      "tension": 0.35,
+      "fill": false
+    },
+    {
+      "label": "Flow Hifigan (Mono)",
+      "data": [
+        null,
+        9.643202612638799,
+        10.015482759386487,
+        9.925821241858076,
+        9.904117660843694,
+        9.663910422170789,
+        9.59499619907836
+      ],
+      "borderColor": "#f6ad55",
+      "backgroundColor": "#f6ad5520",
+      "tension": 0.35,
+      "fill": false
+    }
+  ],
+  "metric_label": "MCD",
+  "x_label": "Training Hours"
+}
