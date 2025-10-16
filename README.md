@@ -124,7 +124,7 @@ If you’re working in this repository and want to run local inference with your
 
 - Base models: FunAudioLLM/CosyVoice2‑0.5B, Qwen/Qwen3‑0.6B, utter‑project/EuroLLM‑1.7B‑Instruct, Mistral‑7B‑v0.3
 - Built on CosyVoice2: https://github.com/FunAudioLLM/CosyVoice
-- Hugging Face model: https://huggingface.co/Luka512/CosyVoice2-0.5B-EU
+- Hugging Face model: https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU
 
 Please cite or acknowledge CosyVoice2 and the respective base LLMs when using this work.
 
@@ -159,8 +159,8 @@ See `NOTICE` for a concise overview of third‑party components and their licens
 ## Links
 
 - PyPI (CLI): https://pypi.org/project/cosyvoice2-eu/
-- Hugging Face (model): https://huggingface.co/Luka512/CosyVoice2-0.5B-EU
-- Live demo: https://horstmann.tech/cosyvoice2-demo/
+- Hugging Face (model): https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU
+- Live demo: https://hi-paris.github.io/DemoTTS/
 - Upstream CosyVoice2: https://github.com/FunAudioLLM/CosyVoice
 - Coqui TTS (XTTS2): https://github.com/coqui-ai/TTS
 - Fish‑Speech: https://github.com/fishaudio/fish-speech
