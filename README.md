@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://pypi.org/project/cosyvoice2-eu/"><img src="https://img.shields.io/pypi/v/cosyvoice2-eu.svg?label=PyPI&color=%23009966" alt="PyPI"></a>
-  <a href="https://huggingface.co/Luka512/CosyVoice2-0.5B-EU"><img src="https://img.shields.io/badge/HuggingFace-CosyVoice2--0.5B--EU-ffcc00?logo=huggingface" alt="HF"></a>
+  <a href="https://hi-paris.github.io/CosyVoice2-EU/"><img src="https://img.shields.io/badge/HuggingFace-CosyVoice2--0.5B--EU-ffcc00?logo=huggingface" alt="HF"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License"></a>
 </p>
 
@@ -13,8 +13,8 @@
 High‑quality French/German zero‑shot TTS built on CosyVoice2. Bilingual adaptation (FR+DE), streaming and non‑streaming synthesis, and a one‑command CLI via the companion PyPI package.
 
 - PyPI: https://pypi.org/project/cosyvoice2-eu/
-- Hugging Face: https://huggingface.co/Luka512/CosyVoice2-0.5B-EU
-- Live demo: https://horstmann.tech/cosyvoice2-demo/
+- Hugging Face: https:https://hi-paris.github.io/CosyVoice2-EU/
+- Live demo: https://hi-paris.github.io/CosyVoice2-EU/
 
 ---
 
