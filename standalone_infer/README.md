@@ -1,7 +1,6 @@
 # CosyVoice2-EU
 
 <div align="center">
-  <img src="https://horstmann.tech/cosyvoice2-demo/cosyvoice2-logo-clear.png" alt="CosyVoice2-EU Logo" width="400"/>
 </div>
 
 Minimal, plug-and-play CosyVoice2 European inference CLI that downloads our model from Hugging Face and runs cross-lingual zero-shot voice cloning TTS. It bundles the required `cosyvoice` runtime and `matcha` module so you don't need the full upstream repo.

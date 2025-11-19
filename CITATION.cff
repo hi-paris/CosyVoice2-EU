@@ -16,7 +16,7 @@ authors:
   - family-names: Moulines
     given-names: Eric
 repository-code: https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU
-url: https://horstmann.tech/cosyvoice2-demo/
+url: https://hi-paris.github.io/CosyVoice2-EU/
 abstract: >-
   High‑quality FR/DE zero‑shot text‑to‑speech built on CosyVoice2, with bilingual
   adaptation, streaming inference, and a simple CLI via the PyPI package

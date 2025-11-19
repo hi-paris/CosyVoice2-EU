@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://horstmann.tech/cosyvoice2-demo/cosyvoice2-logo-clear.png" alt="CosyVoice2‑EU logo" width="260" />
+  <img src="https://hi-paris.github.io/CosyVoice2-EU/cosyvoice2-logo-clear.png" alt="CosyVoice2‑EU logo" width="260" />
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
 High‑quality French/German zero‑shot TTS built on CosyVoice2. Bilingual adaptation (FR+DE), streaming and non‑streaming synthesis, and a one‑command CLI via the companion PyPI package.
 
 - PyPI: https://pypi.org/project/cosyvoice2-eu/
-- Hugging Face: https:https://hi-paris.github.io/CosyVoice2-EU/
+- Hugging Face: https://hi-paris.github.io/CosyVoice2-EU/
 - Live demo: https://hi-paris.github.io/CosyVoice2-EU/
 
 ---
@@ -183,7 +183,7 @@ BibTeX entries (will be updated soon!)
   author       = {Horstmann, Tim Luka and Ould Ouali, Nassima and Arous, Mohamed Amine and Hussain Sani, Awais and Moulines, Eric},
   year         = {2025},
   note         = {Preprint in preparation},
-  howpublished = {\url{https://horstmann.tech/cosyvoice2-demo/}}
+  howpublished = {\url{https://hi-paris.github.io/CosyVoice2-EU/}}
 }
 
 @misc{du2024cosyvoice2,
