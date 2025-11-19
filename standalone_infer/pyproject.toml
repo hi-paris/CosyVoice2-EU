@@ -66,7 +66,7 @@ dependencies = [
 piper = ["piper-phonemize>=1.0"]
 
 [project.urls]
-homepage = "https://huggingface.co/Luka512/CosyVoice2-0.5B-EU"
+homepage = "https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU"
 
 [project.scripts]
 cosy2-eu = "cosyvoice2_eu.cli:main"

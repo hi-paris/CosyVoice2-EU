@@ -57,7 +57,7 @@ def main():
     parser.add_argument('--prompt', type=str, required=True, help='Path to a ≥16kHz prompt wav')
     parser.add_argument('--out', type=str, required=True)
     parser.add_argument('--model-dir', type=str, default=os.path.expanduser('~/.cache/cosyvoice2-eu'))
-    parser.add_argument('--repo-id', type=str, default='Luka512/CosyVoice2-0.5B-EU', help='HF repo to auto-download into --model-dir unless --no-hf is set')
+    parser.add_argument('--repo-id', type=str, default='hi-paris/CosyVoice2-0.5B-EU', help='HF repo to auto-download into --model-dir unless --no-hf is set')
     parser.add_argument('--no-hf', action='store_true', help='Do not download from HF; assume --model-dir already exists')
     parser.add_argument('--setting', type=str, default='llm_flow_hifigan', help='original|llm|flow|hifigan|llm_flow|llm_hifigan|flow_hifigan|llm_flow_hifigan')
     parser.add_argument('--llm-run-id', type=str, default='latest')

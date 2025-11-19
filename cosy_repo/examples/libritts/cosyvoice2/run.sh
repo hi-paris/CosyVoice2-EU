@@ -19,7 +19,7 @@ resume_from_checkpoint=""
 
 # Set Hugging Face repository ID here (optional)
 # NOTE: if not set, data will not be uploaded to Hugging Face
-HF_REPO_ID="Luka512/CosyVoice2-0.5B-EU"
+HF_REPO_ID="hi-paris/CosyVoice2-0.5B-EU"
 
 
 # STAGES OVERVIEW:
@@ -481,7 +481,7 @@ if [ $stage -le 8 ] && [ $stop_stage -ge 8 ]; then
   # upload the final folder to HF
   if [ -n "$HF_REPO_ID" ]; then
     echo "Uploading final folder to HuggingFace Hub..."
-    # hf upload Luka512/CosyVoice2-0.5B-EU /tsi/hi-paris/tts/Luka/exp-H100/cosyvoice2/final_model
+    # hf upload hi-paris/CosyVoice2-0.5B-EU /tsi/hi-paris/tts/Luka/exp-H100/cosyvoice2/final_model
     hf upload $HF_REPO_ID $final_model_dir
   fi
 

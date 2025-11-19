@@ -58,7 +58,7 @@ That's it! The first run will automatically download the model from Hugging Face
 - **Audio Concatenation**: Multiple audio segments are automatically concatenated into a single output file
 - **Experimental Prompt Support**: Style control using `<|endofprompt|>` syntax (limited)
 - **Bundled Runtime**: No need to install the full upstream CosyVoice2 repository
-- **Hugging Face Integration**: Automatic model downloading from [Hugging Face](https://huggingface.co/Luka512/CosyVoice2-0.5B-EU)
+- **Hugging Face Integration**: Automatic model downloading from [Hugging Face](https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU)
 - **Multiple LLM Backbones**: Support for different language model backbones (see below)
 - **Text Frontend Disabled**: Text normalization is disabled by default for better multilingual support
 
@@ -71,7 +71,7 @@ from cosyvoice2_eu import load
 import torchaudio
 
 # Load once (downloads on first use) and reuse
-cosy = load()  # or: load(model_dir="~/.cache/cosyvoice2-eu", repo_id="Luka512/CosyVoice2-0.5B-EU")
+cosy = load()  # or: load(model_dir="~/.cache/cosyvoice2-eu", repo_id="hi-paris/CosyVoice2-0.5B-EU")
 
 # Full synthesis (returns a single waveform)
 wav, sr = cosy.tts(
@@ -104,7 +104,7 @@ if chunks:
 ## 📖 Model & Credits
 
 This package uses our **CosyVoice2-0.5B-EU** model available at: 
-🤗 [Luka512/CosyVoice2-0.5B-EU](https://huggingface.co/Luka512/CosyVoice2-0.5B-EU)
+🤗 [hi-paris/CosyVoice2-0.5B-EU](https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU)
 
 **Built on CosyVoice2**: This project builds upon the excellent
 [CosyVoice2](https://github.com/FunAudioLLM/CosyVoice) by FunAudioLLM (Apache 2.0),

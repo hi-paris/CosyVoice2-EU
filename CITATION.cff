@@ -15,7 +15,7 @@ authors:
     given-names: Awais
   - family-names: Moulines
     given-names: Eric
-repository-code: https://huggingface.co/Luka512/CosyVoice2-0.5B-EU
+repository-code: https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU
 url: https://horstmann.tech/cosyvoice2-demo/
 abstract: >-
   High‑quality FR/DE zero‑shot text‑to‑speech built on CosyVoice2, with bilingual

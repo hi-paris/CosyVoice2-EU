@@ -109,7 +109,7 @@ def main():
     parser.add_argument('--prompt', type=str, required=False, default='prompt_audio/macron.wav', help='Path to a ≥16kHz prompt wav')
     parser.add_argument('--out', type=str, required=False, help='Defaults to audio_output/cl-{{setting}}.wav')
     parser.add_argument('--model-dir', type=str, required=False, default='pretrained_models/CosyVoice2-0.5B-EU')
-    parser.add_argument('--repo-id', type=str, required=False, default='Luka512/CosyVoice2-0.5B-EU', help='HF repo to auto-download into --model-dir when --no-hf is not set')
+    parser.add_argument('--repo-id', type=str, required=False, default='hi-paris/CosyVoice2-0.5B-EU', help='HF repo to auto-download into --model-dir when --no-hf is not set')
     parser.add_argument('--no-hf', action='store_true', help='Do not download from HF; assume --model-dir already exists')
     parser.add_argument('--setting', type=str, default='llm_flow_hifigan', help='See cosyvoice2 settings: original|llm|flow|hifigan|llm_flow|llm_hifigan|flow_hifigan|llm_flow_hifigan')
     parser.add_argument('--llm-run-id', type=str, default='latest')

@@ -96,7 +96,7 @@ class Cosy2EU:
 def load(
     *,
     model_dir: Optional[str] = None,
-    repo_id: str = "Luka512/CosyVoice2-0.5B-EU",
+    repo_id: str = "hi-paris/CosyVoice2-0.5B-EU",
     download: bool = True,
     setting: str = "llm_flow_hifigan",
     llm_run_id: str = "latest",
