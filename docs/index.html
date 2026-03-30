@@ -1,502 +1,1013 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CosyVoice2 for European Languages - Demo</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <img src="cosyvoice2-logo-clear.png" alt="CosyVoice2 Logo" class="header-logo">
-                <!-- <h1 class="title">CosyVoice2 for European Languages</h1> -->
-                <p class="subtitle">Europeanizing CosyVoice2:<br>Data-Efficient Adaptation for French and German Zero-Shot TTS</p>
-                <div class="paper-info">
-                    <span class="conference">ICASSP 2026</span>
-                    <a href="https://2026.ieeeicassp.org/" class="paper-link" target="_blank" rel="noopener">
-                        <i class="fas fa-paper-plane"></i> Under Review
-                    </a>
-                </div>
-                <div class="resource-links">
-                    <div class="resource-category">
-                        <h3><i class="fas fa-toolbox"></i> Project Resources</h3>
-                        <div class="resource-grid">
-                            <a href="https://github.com/hi-paris/CosyVoice2-EU" class="resource-link github" target="_blank" rel="noopener">
-                                <i class="fab fa-github"></i>
-                                GitHub Repository
-                            </a>
-                            <a href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" class="resource-link hf-model" target="_blank" rel="noopener">
-                                <img class="hf-logo" src="https://huggingface.co/front/assets/huggingface_logo.svg" alt="Hugging Face" width="18" height="18" loading="lazy">
-                                Hugging Face Model
-                            </a>
-                            <a href="https://pypi.org/project/cosyvoice2-eu/" class="resource-link pypi" target="_blank" rel="noopener">
-                                <i class="fab fa-python"></i>
-                                PyPI Package
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <iframe allowfullscreen="allowfullscreen"
-                        allow="clipboard-write"
-                        scrolling="no"
-                        class="fp-iframe"
-                        src="https://heyzine.com/flip-book/638e6d8f87.html">
-                </iframe>
-            </div>
-        </div>
-    </header>
+/* ============================================================
+   CosyVoice2-EU — Demo Page Stylesheet
+   Theme: WavLM2Audio-aligned — dark, scientific, editorial
+   ============================================================ */
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <ul class="nav-links">
-                <li><a href="#overview" class="nav-link active">Overview</a></li>
-                <li><a href="#architecture" class="nav-link">Architecture</a></li>
-                <li><a href="#interactive-demo" class="nav-link">Interactive Demo</a></li>
-                <li><a href="#evaluation" class="nav-link">Evaluation Results</a></li>
-            </ul>
-        </div>
-    </nav>
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  /* Core palette — mirrors WavLM demo dark scheme */
+  --bg:            #0a0c10;
+  --bg-surface:    #0f1218;
+  --bg-card:       #141820;
+  --bg-card-hover: #1a2030;
+  --border:        #1e2535;
+  --border-light:  #252d3d;
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <!-- Overview Section -->
-            <section id="overview" class="section">
-                <h2 class="section-title">Research Overview</h2>
-                <div class="overview-grid">
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-globe-americas"></i>
-                        </div>
-                        <h3>Challenge</h3>
-                        <p>While generative TTS excels in English and Chinese, high-quality, expressive synthesis for European languages like French and German is an underexplored area in open-source systems. We address this gap with a systematic, component-level adaptation of CosyVoice2, a state-of-the-art TTS model.</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3>Methodology</h3>
-                        <p>We introduce a rigorous, reproducible ablation grid—fine-tuning key components of CosyVoice2 across data budgets and language regimes. Our backbone-agnostic refactor unlocks plug-and-play LLMs and efficient LoRA adaptation, setting a new standard for multilingual TTS research.</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3>Innovation</h3>
-                        <p>One of the first systematic open, component-level benchmarks of adapting a modern generative TTS (CosyVoice2) to European languages; enabling transparent reproduction, extension & evaluation of cross‑lingual voice + prosody cloning.</p>
-                    </div>
-                </div>
-            </section>
+  /* Accent — WavLM uses a blue-indigo; EU adds a warm complement */
+  --accent:        #6c8fff;
+  --accent-dim:    rgba(108, 143, 255, 0.15);
+  --accent-glow:   rgba(108, 143, 255, 0.08);
+  --accent-fr:     #60c9f8;   /* French blue */
+  --accent-de:     #f4b942;   /* German gold */
+  --accent-green:  #3ecf8e;
+  --accent-red:    #f87171;
 
-            <!-- Architecture Section -->
-            <section id="architecture" class="section">
-                <h2 class="section-title">CosyVoice2 Architecture</h2>
-                
-                <div class="architecture-description">
-                    <p class="architecture-intro">
-                        CosyVoice2 follows a modular three-stage TTS pipeline. Each component can be fine-tuned independently 
-                        or in combination to adapt the model to European languages. Click on the components below to explore their role 
-                        and impact on the final speech quality.
-                    </p>
-                </div>
+  /* Typography */
+  --font-display:  'DM Serif Display', 'Georgia', serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-body:     'DM Sans', system-ui, sans-serif;
 
-                <!-- Architecture Diagram -->
-                <div class="architecture-diagram-container">
-                    <svg class="architecture-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="archTitle archDesc">
-                        <title id="archTitle">CosyVoice2 EU Adaptation Architecture</title>
-                        <desc id="archDesc">Three-layer layout: middle generative pipeline (Input → LM → Flow Matching → HiFi-GAN → Output); top speaker embedding conditioning; bottom reference audio, tokenizer & reference mel prompts into LM / Flow.</desc>
-                        <!-- Reference Audio → Speaker Embedding conditioning path (placed early so it renders behind LM/Flow) -->
-                        <path class="arrow cond-arrow" d="M 145 395 L 145 70 L 410 70 L 420 70" marker-end="url(#arrowhead)"/>
-                        <!-- Text Input -->
-                        <!-- GENERATIVE PIPELINE (Middle Layer) -->
-                        <rect class="input-box" x="60" y="165" width="130" height="90" rx="10"/>
-                        <text x="125" y="195" text-anchor="middle" class="component-text">Input Text</text>
-                        <text x="125" y="210" text-anchor="middle" class="component-subtext">FR/DE Text</text>
-                        <!-- Text → Semantic (LM) -->
-                        <rect class="component-box slm-component" x="220" y="155" width="150" height="110" rx="14" data-component="slm"/>
-                        <text x="295" y="185" text-anchor="middle" class="component-title">Text-Speech LM</text>
-                        <text x="295" y="200" text-anchor="middle" class="component-subtitle">Text → Semantic Tokens</text>
-                        <circle class="finetune-indicator slm-indicator" cx="360" cy="165" r="8"/>
-                        <!-- Flow Matching -->
-                        <rect class="component-box flow-component" x="420" y="155" width="170" height="110" rx="14" data-component="flow"/>
-                        <text x="505" y="180" text-anchor="middle" class="component-title">Flow Matching</text>
-                        <text x="505" y="195" text-anchor="middle" class="component-subtitle">CFM Decoder</text>
-                        <text x="505" y="210" text-anchor="middle" class="component-detail">Semantic → Mel</text>
-                        <circle class="finetune-indicator flow-indicator" cx="580" cy="165" r="8"/>
-                        <!-- HiFi-GAN -->
-                        <rect class="component-box hifigan-component" x="630" y="155" width="160" height="110" rx="14" data-component="hifigan"/>
-                        <text x="710" y="180" text-anchor="middle" class="component-title">HiFi-GAN</text>
-                        <text x="710" y="195" text-anchor="middle" class="component-subtitle">Vocoder (Frozen)</text>
-                        <text x="710" y="210" text-anchor="middle" class="component-detail">Mel → Waveform</text>
-                        <circle class="finetune-indicator hifigan-indicator" cx="785" cy="165" r="8"/>
-                        <!-- Output -->
-                        <rect class="output-box" x="820" y="165" width="130" height="90" rx="10"/>
-                        <text x="885" y="195" text-anchor="middle" class="component-text">Speech Output</text>
-                        <text x="885" y="210" text-anchor="middle" class="component-subtext">🔊 Audio Output</text>
-                        <!-- Forward arrows (solid) -->
-                        <path class="arrow" d="M 190 210 L 220 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 370 210 L 420 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 590 210 L 630 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 790 210 L 820 210" marker-end="url(#arrowhead)"/>
-                        
-                        <!-- TOP CONDITIONING (Speaker Embedding) -->
-                        <rect class="component-box frozen-box" x="420" y="40" width="170" height="60" rx="10"/>
-                        <text x="505" y="65" text-anchor="middle" class="component-title">Speaker Emb.</text>
-                        <text x="505" y="80" text-anchor="middle" class="component-subtitle">CAM++ (Frozen)</text>
-                        <!-- Speaker Embedding to Flow -->
-                        <path class="arrow cond-arrow" d="M 505 100 L 505 155" marker-end="url(#arrowhead)"/>
+  /* Text hierarchy */
+  --text-primary:   #f0f4ff;
+  --text-secondary: #8a96b0;
+  --text-muted:     #4a5568;
+  --text-accent:    #6c8fff;
 
-                        <!-- BOTTOM CONDITIONING (Prompts) -->
-                        <rect class="component-box frozen-box" x="60" y="360" width="170" height="70" rx="10"/>
-                        <text x="145" y="385" text-anchor="middle" class="component-title">Reference Audio</text>
-                        <text x="145" y="400" text-anchor="middle" class="component-subtitle">Prompt Speaker</text>
-                        <rect class="component-box frozen-box" x="270" y="300" width="170" height="70" rx="10"/>
-                        <text x="355" y="315" text-anchor="middle" class="component-title">S3 Speech Tokenizer</text>
-                        <text x="355" y="330" text-anchor="middle" class="component-subtitle">Semantic IDs (Frozen)</text>
-                        <rect class="component-box frozen-box" x="610" y="360" width="170" height="70" rx="10"/>
-                        <text x="695" y="385" text-anchor="middle" class="component-title">Reference Mel</text>
-                        <text x="695" y="400" text-anchor="middle" class="component-subtitle">Acoustic Prompt</text>
-                        <!-- Fan-out from Reference Audio -->
-                        <path class="arrow cond-arrow" d="M 230 395 L 270 375" marker-end="url(#arrowhead)"/>
-                        <path class="arrow cond-arrow" d="M 230 395 Q 420 380 610 395" marker-end="url(#arrowhead)"/>
-                        <!-- Tokenizer to LM (vertical) -->
-                        <path class="arrow cond-arrow" d="M 355 300 L 355 265" marker-end="url(#arrowhead)"/>
-                        <!-- Tokenizer to Flow (diagonal) -->
-                        <path class="arrow cond-arrow" d="M 440 340 L 485 265" marker-end="url(#arrowhead)"/>
-                        <!-- Reference Mel to Flow -->
-                        <path class="arrow cond-arrow" d="M 695 360 Q 640 310 590 265" marker-end="url(#arrowhead)"/>
-                        
-                        <!-- (Optional) subtle horizontal separators (commented out) -->
-                        <!-- <line x1="40" y1="145" x2="960" y2="145" stroke="#e2e8f0" stroke-dasharray="4 6"/> -->
-                        <!-- <line x1="40" y1="340" x2="960" y2="340" stroke="#e2e8f0" stroke-dasharray="4 6"/> -->
-                        
-                        <!-- Fine-tuning Legend (moved lower) -->
-                        <g class="legend" transform="translate(60, 470)">
-                            <text x="0" y="0" class="legend-title">Legend:</text>
-                            <circle cx="20" cy="25" r="8" class="finetune-indicator active" style="fill:#10b981;stroke:#059669;"/>
-                            <text x="35" y="30" class="legend-text">Fine‑tuned Module</text>
-                            <circle cx="220" cy="25" r="8" class="finetune-indicator inactive"/>
-                            <text x="235" y="30" class="legend-text">Frozen Module</text>
-                            <line x1="20" y1="50" x2="60" y2="50" class="arrow cond-arrow"/>
-                            <text x="70" y="54" class="legend-text">Conditioning / Prompt</text>
-                        </g>
-                        
-                        <!-- Arrow marker definition -->
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                    refX="10" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
-                            </marker>
-                        </defs>
-                    </svg>
-                </div>
+  /* Radius */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 24px;
 
-                <!-- Component Information Panel -->
-                <div class="component-info-panel">
-                    <div class="info-content" id="info-content">
-                        <h3>Select a Component</h3>
-                        <p>Upper row: generative stages. Lower row: frozen prompt / conditioning path (semantic tokenizer, speaker embedding, reference mel). LM & Flow are primary adaptation targets; HiFi-GAN stays frozen.</p>
-                    </div>
-                </div>
-            </section>
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(108,143,255,0.07);
+}
 
-            <!-- Interactive Demo Section -->
-            <section id="interactive-demo" class="section">
-                <h2 class="section-title">Interactive Fine-tuning Demo</h2>
-                
-                <!-- Sample Text -->
-                <div class="demo-text-section">
-                    <h3>Sample Text</h3>
-                    
-                    <!-- Language Selector -->
-                    <div class="language-selector">
-                        <div class="language-switch">
-                            <input type="radio" id="lang-french" name="language" value="fr" checked>
-                            <label for="lang-french" class="language-option">
-                                <span class="flag">🇫🇷</span>
-                                <span class="lang-name">French</span>
-                            </label>
-                            <input type="radio" id="lang-german" name="language" value="de">
-                            <label for="lang-german" class="language-option">
-                                <span class="flag">🇩🇪</span>
-                                <span class="lang-name">German</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="text-sample" id="sample-text">
-                        "Bonjour, je m'appelle Luka et je travaille dans une entreprise de technologie à Paris.
-                        Aujourd'hui, nous allons explorer les capacités de synthèse vocale en français avec CosyVoice 2."
-                    </div>
-                                    <!-- Inline Prompt (subtle) -->
-                                    <div class="prompt-inline">
-                                        <div class="prompt-inline-card">
-                                            <div class="prompt-inline-meta">
-                                                <i class="fas fa-microphone" aria-hidden="true"></i>
-                                                <span id="prompt-language-inline">French</span>
-                                                <small class="prompt-inline-note">reference voice</small>
-                                            </div>
-                                            <audio controls class="audio-player prompt-player" id="prompt-audio-inline">
-                                                <source src="common_voice_fr_40952142.wav" type="audio/wav" id="prompt-source">
-                                                Your browser does not support the audio element.
-                                            </audio>
-                                        </div>
-                                    </div>
-                </div>
+/* ── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-                <!-- Fine-tuning Controls -->
-                <div class="finetuning-controls">
-                    <h3>Fine-tuning Configuration</h3>
-                    <div class="control-grid">
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="slm-toggle" class="component-toggle" data-component="slm">
-                                <span class="checkbox-custom"></span>
-                                Text-Speech LM Fine-tuning
-                            </label>
-                            <p class="control-description">Improves semantic understanding and pronunciation patterns</p>
-                        </div>
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="flow-toggle" class="component-toggle" data-component="flow">
-                                <span class="checkbox-custom"></span>
-                                Flow Matching Fine-tuning
-                            </label>
-                            <p class="control-description">Enhances prosody and natural speech rhythm</p>
-                        </div>
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="hifigan-toggle" class="component-toggle" data-component="hifigan">
-                                <span class="checkbox-custom"></span>
-                                HiFi-GAN Fine-tuning*
-                            </label>
-                            <p class="control-description">Improves audio quality and reduces artifacts</p>
-                        </div>
-                    </div>
-                </div>
+html { scroll-behavior: smooth; font-size: 16px; }
 
-                <!-- prompt section moved above (inline with sample text) -->
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
 
-                <!-- Audio Comparison Grid -->
-                <div class="audio-grid">
-                    <div class="audio-card baseline-card">
-                        <h4><i class="fas fa-play-circle"></i> Baseline (No Fine-tuning)</h4>
-                        <div class="quality-indicators">
-                            <span class="quality-badge poor">Strong English Accent</span>
-                            <span class="quality-badge poor">Unnatural Prosody</span>
-                        </div>
-                        <audio controls class="audio-player" data-config="baseline">
-                            <source src="audio/original-fr.wav" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <p class="audio-description">Original CosyVoice2 model without any language-specific training.</p>
-                    </div>
+/* ── Google Fonts import ────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
 
-                    <div class="audio-card dynamic-card" id="dynamic-audio-card">
-                        <h4 id="dynamic-title"><i class="fas fa-magic"></i> Current Configuration</h4>
-                        <div class="quality-indicators" id="dynamic-indicators">
-                            <span class="quality-badge neutral">Select components to hear improvements</span>
-                        </div>
-                        <audio controls class="audio-player" id="dynamic-audio" data-config="dynamic">
-                            <source src="audio/original-fr.wav" type="audio/wav" id="dynamic-source">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <p class="audio-description" id="dynamic-description">
-                            Select fine-tuning components above to hear the progressive improvements in speech quality.
-                        </p>
-                    </div>
-                </div>
+/* ── Container ──────────────────────────────────────────────── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-                <!-- Research Notes -->
-                <div class="research-notes">
-                    <div class="footnote">
-                        <span class="footnote-marker">*</span>
-                        <span class="footnote-text">
-                            <strong>Note on HiFi-GAN Training:</strong> The "original" HiFi-GAN here uses a partially trained vocoder, while "fine-tuned" represents the official CosyVoice2 HiFi-GAN model. 
-                            By doing so, we aim to showcase the effect of the vocoder on speech quality, as typically 
-                            <a href="https://github.com/FunAudioLLM/CosyVoice/issues/1349#issuecomment-2942786544" target="_blank" class="inline-link">no additional HiFi-GAN training is needed</a> 
-                            for cross-lingual adaptation.
-                        </span>
-                    </div>
-                </div>
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0d1020 0%, var(--bg) 100%);
+  padding: 72px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
 
-                <!-- Interactive Results Table (below HiFi-GAN footnote) -->
-                <div id="config-results" class="results-table-card">
-                    <h3 class="results-table-title">See how these configurations compare quantitatively on our test data</h3>
-                    <p class="results-table-subtitle">Rows map to your selections above (Text‑Speech LM, Flow, HiFi‑GAN). We highlight the matching row automatically.</p>
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(108,143,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 70%, rgba(96,201,248,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
 
-                    <div class="symbols-legend" aria-label="Legend for symbols">
-                        <span class="legend-item"><span class="legend-swatch legend-circle" aria-hidden="true">◦</span> original (unchanged)</span>
-                        <span class="legend-item"><span class="legend-swatch legend-plus" aria-hidden="true">⊕</span> fine‑tuned</span>
-                        <span class="legend-item"><span class="legend-swatch legend-minus" aria-hidden="true">⊖</span> partially trained</span>
-                    </div>
+.header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
 
-                    <div class="table-scroll">
-                        <table id="config-table" class="metrics-table" aria-describedby="config-table-caption">
-                            <!-- populated by script.js -->
-                        </table>
-                    </div>
-                    <p id="config-table-caption" class="results-table-caption">Metrics: WER↓ (intelligibility), SECS↑ (speaker similarity), MCD↓ (distortion). Column emphasis follows the selected language.</p>
-                </div>
-            </section>
+.header-logo {
+  height: 48px;
+  filter: brightness(1.1);
+  margin-bottom: 8px;
+}
 
-            <!-- Evaluation Results Section -->
-            <section id="evaluation" class="section">
-                <h2 class="section-title">Evaluation Results</h2>
-                
-                <!-- Results Overview -->
-                <div class="results-overview">
-                    <p class="results-intro">
-                        Evaluation across intelligibility (WER↓), speaker similarity (SECS↑), spectral distortion (MCD↓), pitch correlation (F0 Corr↑), and voicing error (V/UV↓). Most WER gains stem from LM fine‑tuning; Flow refines prosody; HiFi-GAN stays robust frozen.
-                    </p>
-                </div>
-                <div class="metric-legend" style="text-align:center;margin:-20px 0 40px 0;font-size:0.9rem;">
-                    <strong>Metric Directions:</strong> WER / MCD / V/UV ↓; SECS / F0 Corr ↑.
-                </div>
+/* Conference badge — same pill style as WavLM */
+.paper-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-                <!-- Language and Metric Selectors -->
-                <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <!-- Language Selector for Evaluation -->
-                    <div style="display: flex; align-items: center;">
-                        <label for="eval-language-select" style="font-weight:600; font-size:1.1em; margin-right:10px;">Language:</label>
-                        <select id="eval-language-select" style="font-size:1em; padding:6px 16px; border-radius:8px; border:1px solid #e2e8f0;">
-                            <option value="fr">🇫🇷 French</option>
-                            <option value="de">🇩🇪 German</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Metric Selector -->
-                    <div style="display: flex; align-items: center;">
-                        <label for="metric-select" style="font-weight:600; font-size:1.1em; margin-right:10px;">Metric:</label>
-                        <select id="metric-select" style="font-size:1em; padding:6px 16px; border-radius:8px; border:1px solid #e2e8f0;">
-                            <option value="wer_norm" selected>Word Error Rate (normalized)</option>
-                            <option value="secs">Speaker Similarity</option>
-                            <option value="mcd">Mel Cepstral Distortion (MCD)</option>
-                            <option value="f0_corr">F0 Correlation</option>
-                            <option value="vuv">Voiced/Unvoiced Error (V/UV)</option>
-                        </select>
-                    </div>
-                </div>
+.conference {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(108,143,255,0.3);
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 
-                <!-- Metrics Grid -->
+.paper-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(244,185,66,0.1);
+  color: var(--accent-de);
+  border: 1px solid rgba(244,185,66,0.25);
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: background 0.2s, border-color 0.2s;
+}
+.paper-link:hover { background: rgba(244,185,66,0.18); border-color: rgba(244,185,66,0.45); }
 
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>Component Comparison</h3>
-                        <div class="chart-container large">
-                            <canvas id="radar-chart" width="520" height="380"></canvas>
-                            <button class="fullscreen-btn" data-chart="radar-chart">⛶</button>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Learning Curve</h3>
-                        <div class="chart-container">
-                            <canvas id="learning-curve-chart" width="400" height="300"></canvas>
-                            <button class="fullscreen-btn" data-chart="learning-curve-chart">⛶</button>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Mix vs Mono Training (across hours)</h3>
-                        <div class="chart-container">
-                            <canvas id="mix-mono-curve-chart" width="400" height="300"></canvas>
-                            <button class="fullscreen-btn" data-chart="mix-mono-curve-chart">⛶</button>
-                        </div>
-                    </div>
-                </div>
+/* Title */
+.subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.25;
+  color: var(--text-primary);
+  max-width: 720px;
+  letter-spacing: -0.01em;
+}
 
-                <!-- Baseline vs Best Model Full Width -->
-                <div class="baseline-fullwidth">
-                    <h3>Baseline vs Best Model (anchored by min WER_norm)</h3>
-                    <div class="chart-container large">
-                        <canvas id="baseline-chart" width="800" height="400"></canvas>
-                        <button class="fullscreen-btn" data-chart="baseline-chart">⛶</button>
-                    </div>
-                </div>
+/* Resource links row */
+.resource-links { width: 100%; max-width: 640px; }
+.resource-category h3 {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
 
-                <!-- Key Findings -->
-                <div class="key-findings">
-                    <h3>Key Findings</h3>
-                    <div class="findings-grid">
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <h4>Most Impactful Component</h4>
-                            <p>The text-speech language model is the key driver of quality, capturing linguistic rhythm and phrasing essential for intelligibility and natural prosody. Flow fine-tuning further improves continuity and expressiveness, while the vocoder is robust and rarely a bottleneck for cross-lingual adaptation.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <h4>Data Scaling & Efficiency</h4>
-                            <p>Most gains arise within ~100–500 monolingual hours (≈ total 200–1000 in bilingual). WER plateaus early under current data scale; SECS continues modest upward trend reflecting prosody refinement.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <h4>Component Synergy & Practical Recipe</h4>
-                            <p>Fine-tune the LM for immediate gains; add flow adaptation for enhanced prosody if resources allow. Vocoder and tokenizer can remain frozen. This modular strategy streamlines adaptation for new languages and domains.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
-                            <h4>Cross-lingual Training Effects</h4>
-                            <p>Bilingual training consistently boosts SECS; WER benefits appear at very low & high scales, neutral mid-scale—indicating cross-lingual style regularization.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h4>Limitations & Future Directions</h4>
-                            <p>Limitations: frozen speech tokenizer; moderate data size. Future: tokenizer adaptation, larger corpora, backbone swaps, instruction-tuned prosody prompts.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
+.resource-grid {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <p class="authors">
-                        <strong>Researchers:</strong> 
-                        <span class="author-highlight">Tim Luka Horstmann<sup>1,2</sup></span>,
-                        <span class="author">Nassima Ould Ouali<sup>1</sup></span>, 
-                        <span class="author">Amine Mohamed Arous<sup>3</sup></span>, <br>
-                        <span class="author">Awais Hussain Sani<sup>2</sup></span>,
-                        <a href="https://en.wikipedia.org/wiki/%C3%89ric_Moulines" class="author-highlight">Eric Moulines<sup>1</sup></a>
-                    </p>
-                    <p class="affiliations">
-                        <!-- add superscripts -->
-                        École Polytechnique<sup>1</sup>, Hi! PARIS Research Center<sup>2</sup>, ENSTA Paris<sup>3</sup>
-                    </p>
-                    <p class="affiliations">Model: <a href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" target="_blank" class="inline-link">Hugging Face</a> · Package: <a href="https://pypi.org/project/cosyvoice2-eu/" target="_blank" class="inline-link">PyPI</a></p>
-                    <p class="copyright">&copy; 2025.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="https://github.com/hi-paris/CosyVoice2-EU" class="footer-link">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:nassima.ould-ouali@ip-paris.fr" class="footer-link">
-                        <i class="fas fa-envelope"></i> Contact
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--r-md);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.resource-link:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-card-hover); }
+.resource-link.github:hover { border-color: #6e7681; }
+.resource-link.hf-model:hover { border-color: #f2a03f; color: #f2a03f; }
+.resource-link.pypi:hover { border-color: #3b82f6; color: #60a5fa; }
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.hf-logo { filter: brightness(0.9); }
+
+/* Heyzine iframe */
+.fp-iframe {
+  width: 100%;
+  max-width: 820px;
+  height: 480px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-top: 8px;
+}
+
+/* ── Navigation ─────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 12, 16, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 16px 22px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.03em;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Main / Sections ─────────────────────────────────────────── */
+.main { padding: 0 0 100px; }
+
+.section {
+  padding: 80px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-child { border-bottom: none; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ── Overview Cards ─────────────────────────────────────────── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.overview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.overview-card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-glow);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.overview-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+.overview-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Architecture ────────────────────────────────────────────── */
+.architecture-description { margin-bottom: 32px; }
+.architecture-intro {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 700px;
+  line-height: 1.7;
+}
+
+.architecture-diagram-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+/* SVG architecture styles */
+.architecture-svg { width: 100%; max-width: 1000px; min-width: 700px; display: block; margin: 0 auto; }
+
+.input-box, .output-box {
+  fill: var(--bg-surface);
+  stroke: var(--border-light);
+  stroke-width: 1.5;
+}
+
+.component-box {
+  fill: var(--bg-card);
+  stroke: var(--border);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: stroke 0.2s, fill 0.2s;
+}
+.component-box:hover { stroke: var(--accent); fill: var(--bg-card-hover); }
+
+.slm-component { stroke: rgba(108,143,255,0.5); fill: rgba(108,143,255,0.05); }
+.flow-component { stroke: rgba(96,201,248,0.5); fill: rgba(96,201,248,0.05); }
+.hifigan-component { stroke: rgba(62,207,142,0.5); fill: rgba(62,207,142,0.05); }
+.frozen-box { stroke: var(--border); fill: rgba(255,255,255,0.02); }
+
+.component-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--text-primary);
+}
+.component-subtitle, .component-detail {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+.component-text {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  fill: var(--text-secondary);
+}
+.component-subtext {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+
+.arrow {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.8;
+}
+.cond-arrow {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 3;
+}
+
+.finetune-indicator {
+  fill: var(--text-muted);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+.slm-indicator  { fill: var(--accent); stroke: rgba(108,143,255,0.4); }
+.flow-indicator { fill: var(--accent-fr); stroke: rgba(96,201,248,0.4); }
+.hifigan-indicator { fill: var(--text-muted); stroke: var(--border); }
+
+.legend-title { font-family: var(--font-mono); font-size: 11px; fill: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.legend-text  { font-family: var(--font-mono); font-size: 11px; fill: var(--text-secondary); }
+
+/* Component info panel */
+.component-info-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  min-height: 64px;
+}
+.info-content h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.info-content p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+/* ── Interactive Demo ────────────────────────────────────────── */
+.demo-text-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 28px 24px;
+  margin-bottom: 24px;
+}
+
+.demo-text-section h3 {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Language selector */
+.language-selector { margin-bottom: 16px; }
+.language-switch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+.language-switch input[type="radio"] { display: none; }
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background 0.18s, color 0.18s;
+  user-select: none;
+}
+.language-switch input:checked + .language-option {
+  background: var(--accent-dim);
+  color: var(--text-primary);
+}
+.language-option:hover { background: rgba(255,255,255,0.04); color: var(--text-secondary); }
+
+.text-sample {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+}
+
+/* Prompt inline card */
+.prompt-inline-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  flex-wrap: wrap;
+}
+.prompt-inline-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  min-width: 140px;
+}
+.prompt-inline-note {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Fine-tuning controls */
+.finetuning-controls {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.finetuning-controls h3 {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.control-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+.control-item:has(.component-toggle:checked) {
+  border-color: rgba(108,143,255,0.4);
+  background: rgba(108,143,255,0.04);
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.component-toggle { display: none; }
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 4px;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, background 0.18s;
+  position: relative;
+}
+.component-toggle:checked + .checkbox-custom {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.component-toggle:checked + .checkbox-custom::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.control-description {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 28px;
+  line-height: 1.5;
+}
+
+/* Audio comparison grid */
+.audio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (max-width: 640px) { .audio-grid { grid-template-columns: 1fr; } }
+
+.audio-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.audio-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.baseline-card { border-color: rgba(248,113,113,0.2); }
+.dynamic-card  { border-color: rgba(108,143,255,0.25); }
+
+.quality-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.quality-badge {
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.quality-badge.poor    { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+.quality-badge.good    { background: rgba(62,207,142,0.12); color: #3ecf8e; border: 1px solid rgba(62,207,142,0.25); }
+.quality-badge.neutral { background: var(--bg-surface); color: var(--text-muted); border: 1px solid var(--border); }
+
+.audio-description {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Native audio player styling */
+.audio-player {
+  width: 100%;
+  height: 36px;
+  accent-color: var(--accent);
+  border-radius: var(--r-sm);
+}
+.audio-player::-webkit-media-controls-panel { background: var(--bg-surface); }
+
+/* Research notes */
+.research-notes {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+.footnote {
+  display: flex;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.footnote-marker {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.inline-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(108,143,255,0.3);
+  transition: border-color 0.18s;
+}
+.inline-link:hover { border-color: var(--accent); }
+
+/* Interactive results table card */
+.results-table-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin-top: 8px;
+}
+.results-table-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.results-table-subtitle {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.symbols-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { font-size: 1.1em; }
+.legend-plus  { color: var(--accent-green); }
+.legend-minus { color: var(--accent-de); }
+.legend-circle { color: var(--text-muted); }
+
+.table-scroll { overflow-x: auto; }
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.87rem;
+}
+.metrics-table th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.metrics-table th:first-child,
+.metrics-table th:nth-child(2),
+.metrics-table th:nth-child(3) { text-align: center; }
+.metrics-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.metrics-table td:first-child,
+.metrics-table td:nth-child(2),
+.metrics-table td:nth-child(3) { text-align: center; }
+.metrics-table tr:last-child td { border-bottom: none; }
+.metrics-table tr.highlighted td { background: rgba(108,143,255,0.07); color: var(--text-primary); }
+.metrics-table tr.highlighted td:first-child { color: var(--accent); }
+.metrics-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+.results-table-caption {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-family: var(--font-mono);
+}
+
+/* ── Evaluation Section ──────────────────────────────────────── */
+.results-overview { margin-bottom: 28px; }
+.results-intro {
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  max-width: 760px;
+  line-height: 1.7;
+}
+
+.metric-legend {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 24px;
+}
+
+/* Selectors */
+.metrics-grid + div select,
+div[style] select {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Override inline styles for language/metric selectors */
+#eval-language-select,
+#metric-select {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  padding: 8px 14px !important;
+  font-size: 0.9rem !important;
+  font-family: var(--font-body) !important;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Charts grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.metric-card:hover { border-color: var(--border-light); }
+.metric-card h3 {
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.chart-container {
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-container.large { min-height: 380px; }
+
+.fullscreen-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: color 0.18s, border-color 0.18s;
+}
+.fullscreen-btn:hover { color: var(--text-primary); border-color: var(--accent); }
+
+/* Baseline fullwidth */
+.baseline-fullwidth {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin-bottom: 40px;
+}
+.baseline-fullwidth h3 {
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* Key Findings */
+.key-findings {
+  margin-top: 40px;
+}
+.key-findings h3 {
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.findings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.finding-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 22px 20px;
+  transition: border-color 0.2s;
+}
+.finding-item:hover { border-color: var(--border-light); }
+
+.finding-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.finding-item h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.finding-item p {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 0;
+  background: var(--bg-surface);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-main p {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.footer-main .authors { color: var(--text-secondary); margin-bottom: 8px; }
+.footer-main .affiliations { font-size: 0.82rem; }
+.author-highlight { color: var(--accent); font-weight: 500; }
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 500;
+  background: var(--bg-card);
+  transition: border-color 0.18s, color 0.18s;
+}
+.footer-link:hover { border-color: var(--accent); color: var(--text-primary); }
+
+/* ── Chart.js global overrides ───────────────────────────────── */
+canvas { border-radius: var(--r-md); }
+
+/* ── Utilities ───────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  .header { padding: 48px 0 40px; }
+  .section { padding: 56px 0 32px; }
+  .resource-grid { flex-direction: column; align-items: stretch; }
+  .resource-link { justify-content: center; }
+  .footer-content { flex-direction: column; }
+  .fp-iframe { height: 320px; }
+  .audio-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .control-grid { grid-template-columns: 1fr; }
+  .nav-link { padding: 14px 14px; font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .subtitle { font-size: 1.4rem; }
+  .paper-info { flex-direction: column; align-items: center; }
+  .findings-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Selection ───────────────────────────────────────────────── */
+::selection { background: rgba(108,143,255,0.25); color: var(--text-primary); }
+
+/* ── Focus ───────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
