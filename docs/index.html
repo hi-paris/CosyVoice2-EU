@@ -1,502 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CosyVoice2 for European Languages - Demo</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CosyVoice2 for European Languages - Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root{
+  --navy:#0B1929;--nm:#112240;--ns:#1a3055;
+  --a:#4FC3F7;--a2:#81C784;--a3:#FFB74D;--a4:#CF6679;
+  --t:#E8EDF2;--tm:#7A8FA6;--td:#4A5D72;
+  --bs:rgba(255,255,255,0.06);--card:rgba(17,34,64,0.85);
+  --sf:'DM Serif Display',Georgia,serif;
+  --ss:'Syne',sans-serif;--mo:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--t);font-family:var(--ss);font-size:16px;line-height:1.7;overflow-x:hidden}
+::selection{background:rgba(79,195,247,0.25)}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,195,247,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(79,195,247,0.025) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+
+/* NAV */
+nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,25,41,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--bs)}
+.logo{font-family:var(--mo);font-size:13px;color:var(--a);letter-spacing:.08em;text-transform:uppercase}
+.nav-links-list{display:flex;gap:32px;list-style:none}
+.nav-links-list a{text-decoration:none;color:var(--tm);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links-list a:hover,
+.nav-links-list a.active{color:var(--a)}
+.nav-pill{font-family:var(--mo);font-size:11px;background:rgba(79,195,247,0.1);color:var(--a);border:1px solid rgba(79,195,247,0.3);padding:4px 12px;border-radius:3px;letter-spacing:.07em}
+
+/* DIVIDER */
+.div{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(79,195,247,.12),transparent);z-index:1;position:relative}
+
+/* SECTION */
+.sec{position:relative;z-index:1;padding:96px 48px;max-width:1200px;margin:0 auto}
+.stag{font-family:var(--mo);font-size:11px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.stag::after{content:'';flex:1;max-width:40px;height:1px;background:var(--a);opacity:.4}
+.sec h2{font-family:var(--sf);font-size:clamp(30px,3.8vw,50px);line-height:1.08;margin-bottom:10px;color:var(--t)}
+.sec h2 em{font-style:italic;color:var(--a)}
+.sec-intro{font-size:15px;color:var(--tm);max-width:700px;margin-bottom:48px;line-height:1.75}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:110px 48px 72px;z-index:1;overflow:hidden}
+.hero-inner{max-width:700px}
+.htag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mo);font-size:11px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
+.htag::before{content:'';width:22px;height:1px;background:var(--a)}
+.hero-logo{height:56px;margin-bottom:20px;display:block;filter:brightness(0) invert(1) opacity(.9)}
+.hero h1{font-family:var(--sf);font-size:clamp(32px,4.5vw,66px);line-height:1.05;margin-bottom:6px}
+.hero h1 em{font-style:italic;color:var(--a)}
+.hero-italic{font-family:var(--sf);font-style:italic;font-size:clamp(14px,1.6vw,19px);color:var(--tm);margin-top:4px}
+.hero-sub{font-size:15px;color:var(--tm);max-width:580px;margin:20px 0 32px;line-height:1.75}
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.hbadge{font-family:var(--mo);font-size:11px;padding:5px 14px;border-radius:3px;letter-spacing:.06em;border:1px solid rgba(79,195,247,.3);background:rgba(79,195,247,.08);color:var(--a);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .2s}
+.hbadge:hover{background:rgba(79,195,247,.15);border-color:rgba(79,195,247,.5)}
+.hbadge.hf{border-color:rgba(255,183,77,.3);background:rgba(255,183,77,.08);color:var(--a3)}
+.hbadge.hf:hover{background:rgba(255,183,77,.15);border-color:rgba(255,183,77,.5)}
+.hbadge.pypi{border-color:rgba(129,199,132,.3);background:rgba(129,199,132,.08);color:var(--a2)}
+.hbadge.pypi:hover{background:rgba(129,199,132,.15);border-color:rgba(129,199,132,.5)}
+.hero-stats{display:flex;gap:36px;flex-wrap:wrap}
+.stat-val{font-family:var(--sf);font-size:34px;color:var(--t);line-height:1}
+.stat-val span{color:var(--a)}
+.stat-lbl{font-family:var(--mo);font-size:10px;color:var(--td);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+
+/* FLIPBOOK */
+.fp-iframe{width:100%;height:320px;border:1px solid var(--bs);border-radius:10px;background:rgba(255,255,255,.02);margin-top:32px;display:block}
+
+/* OVERVIEW CARDS */
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:0}
+.ov-card{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:28px 24px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.ov-card:hover{border-color:rgba(79,195,247,.22);transform:translateY(-2px)}
+.ov-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),transparent)}
+.ov-card:nth-child(2)::before{background:linear-gradient(90deg,var(--a2),transparent)}
+.ov-card:nth-child(3)::before{background:linear-gradient(90deg,var(--a3),transparent)}
+.ov-ico{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:16px;background:rgba(79,195,247,.1);color:var(--a);border:1px solid rgba(79,195,247,.2)}
+.ov-card:nth-child(2) .ov-ico{background:rgba(129,199,132,.1);color:var(--a2);border-color:rgba(129,199,132,.2)}
+.ov-card:nth-child(3) .ov-ico{background:rgba(255,183,77,.1);color:var(--a3);border-color:rgba(255,183,77,.2)}
+.ov-card h3{font-size:15px;font-weight:700;color:var(--t);margin-bottom:8px}
+.ov-card p{font-size:13px;color:var(--tm);line-height:1.65}
+
+/* ARCHITECTURE SVG */
+.arch-intro{font-size:14px;color:var(--tm);max-width:680px;margin-bottom:24px;line-height:1.7}
+.arch-svg-wrap{width:100%;overflow-x:auto;background:rgba(8,18,34,.6);border:1px solid var(--bs);border-radius:12px;padding:24px 16px;margin-bottom:24px}
+.architecture-svg{min-width:760px;display:block;margin:0 auto}
+
+/* SVG internals */
+.architecture-svg .input-box,.architecture-svg .output-box{fill:rgba(79,195,247,.08);stroke:rgba(79,195,247,.35);stroke-width:1.5}
+.architecture-svg .component-box{fill:rgba(17,34,64,.9);stroke:rgba(79,195,247,.25);stroke-width:1.5;cursor:pointer;transition:stroke .2s}
+.architecture-svg .component-box:hover{stroke:rgba(79,195,247,.7)}
+.architecture-svg .frozen-box{fill:rgba(17,34,64,.7);stroke:rgba(74,93,114,.4);stroke-width:1.2}
+.architecture-svg .slm-component{stroke:rgba(79,195,247,.4)}
+.architecture-svg .flow-component{stroke:rgba(129,199,132,.4)}
+.architecture-svg .hifigan-component{stroke:rgba(255,183,77,.4)}
+.architecture-svg .component-text{fill:var(--t);font-size:13px;font-weight:600;font-family:var(--ss)}
+.architecture-svg .component-subtext{fill:var(--tm);font-size:11px;font-family:var(--mo)}
+.architecture-svg .component-title{fill:var(--t);font-size:12px;font-weight:600;font-family:var(--ss)}
+.architecture-svg .component-subtitle{fill:var(--tm);font-size:10px;font-family:var(--mo)}
+.architecture-svg .component-detail{fill:var(--td);font-size:10px;font-family:var(--mo)}
+.architecture-svg .arrow{fill:none;stroke:var(--td);stroke-width:1.5}
+.architecture-svg .cond-arrow{stroke:rgba(79,195,247,.35);stroke-dasharray:4 3}
+.architecture-svg .finetune-indicator{fill:rgba(79,195,247,.15);stroke:rgba(79,195,247,.5);stroke-width:1.5}
+.architecture-svg .slm-indicator{fill:rgba(79,195,247,.25);stroke:var(--a)}
+.architecture-svg .flow-indicator{fill:rgba(129,199,132,.25);stroke:var(--a2)}
+.architecture-svg .hifigan-indicator{fill:rgba(255,183,77,.2);stroke:var(--a3)}
+.architecture-svg .legend-title{fill:var(--td);font-size:11px;font-family:var(--mo);letter-spacing:.06em;text-transform:uppercase}
+.architecture-svg .legend-text{fill:var(--tm);font-size:11px;font-family:var(--mo)}
+
+/* Component info panel */
+.component-info-panel{background:var(--card);border:1px solid var(--bs);border-radius:10px;padding:20px 24px;margin-bottom:48px}
+.component-info-panel h3{font-family:var(--sf);font-size:18px;color:var(--t);margin-bottom:8px}
+.component-info-panel p{font-size:13px;color:var(--tm);line-height:1.65}
+
+/* DEMO CONTROLS */
+.demo-text-section{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:24px 28px;margin-bottom:20px}
+.demo-text-section h3{font-family:var(--sf);font-size:18px;color:var(--t);margin-bottom:16px}
+.language-selector{margin-bottom:16px}
+.language-switch{display:flex;gap:0;border:1px solid var(--bs);border-radius:8px;overflow:hidden;width:fit-content}
+.language-switch input[type=radio]{display:none}
+.language-option{display:flex;align-items:center;gap:8px;padding:8px 20px;cursor:pointer;font-family:var(--mo);font-size:11px;letter-spacing:.07em;color:var(--td);background:transparent;transition:all .2s;border-right:1px solid var(--bs)}
+.language-option:last-of-type{border-right:none}
+.language-switch input[type=radio]:checked+.language-option{background:rgba(79,195,247,.1);color:var(--a)}
+.text-sample{font-size:14px;color:var(--tm);font-style:italic;line-height:1.7;padding:14px 18px;background:rgba(0,0,0,.2);border-radius:8px;border:1px solid var(--bs);margin-bottom:16px}
+
+/* Prompt inline */
+.prompt-inline{margin-top:4px}
+.prompt-inline-card{background:rgba(0,0,0,.2);border:1px solid var(--bs);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.prompt-inline-meta{display:flex;align-items:center;gap:8px;font-family:var(--mo);font-size:10px;color:var(--td);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
+.prompt-inline-note{color:var(--td);font-size:9px}
+audio.prompt-player{flex:1;min-width:200px;height:30px}
+
+/* Fine-tuning controls */
+.finetuning-controls{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:24px 28px;margin-bottom:20px}
+.finetuning-controls h3{font-family:var(--sf);font-size:18px;color:var(--t);margin-bottom:18px}
+.control-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.control-item{background:rgba(0,0,0,.2);border:1px solid var(--bs);border-radius:8px;padding:16px}
+.control-label{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:600;color:var(--t);margin-bottom:6px}
+.control-label input[type=checkbox]{display:none}
+.checkbox-custom{width:16px;height:16px;border-radius:3px;border:1px solid rgba(79,195,247,.4);background:transparent;flex-shrink:0;transition:all .2s;position:relative}
+.control-label input:checked+.checkbox-custom{background:var(--a);border-color:var(--a)}
+.control-label input:checked+.checkbox-custom::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--navy);font-weight:700}
+.control-description{font-size:12px;color:var(--tm);line-height:1.5}
+
+/* Audio grid */
+.audio-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.audio-card{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:20px 22px;transition:border-color .2s}
+.audio-card:hover{border-color:rgba(79,195,247,.2)}
+.baseline-card{border-top:2px solid rgba(74,93,114,.4)}
+.dynamic-card{border-top:2px solid rgba(79,195,247,.5)}
+.audio-card h4{font-size:13px;font-weight:700;color:var(--t);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.quality-indicators{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.quality-badge{font-family:var(--mo);font-size:9px;padding:2px 8px;border-radius:3px;letter-spacing:.06em}
+.quality-badge.poor{background:rgba(207,102,121,.1);color:var(--a4);border:1px solid rgba(207,102,121,.25)}
+.quality-badge.good{background:rgba(129,199,132,.1);color:var(--a2);border:1px solid rgba(129,199,132,.25)}
+.quality-badge.neutral{background:rgba(79,195,247,.08);color:var(--a);border:1px solid rgba(79,195,247,.2)}
+audio.audio-player{width:100%;height:30px;margin-bottom:8px}
+.audio-description{font-size:11px;color:var(--td);line-height:1.5}
+
+/* Research notes */
+.research-notes{background:rgba(255,183,77,.04);border:1px solid rgba(255,183,77,.15);border-radius:8px;padding:14px 18px;margin-bottom:28px}
+.footnote{display:flex;gap:10px;font-size:12px;color:var(--tm);line-height:1.6}
+.footnote-marker{font-family:var(--mo);color:var(--a3);font-size:13px;flex-shrink:0}
+.footnote-text a,.inline-link{color:var(--a);text-decoration:none}
+.footnote-text a:hover,.inline-link:hover{text-decoration:underline}
+
+/* Results table */
+#config-results{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:24px 28px;margin-bottom:28px}
+.results-table-title{font-family:var(--sf);font-size:18px;color:var(--t);margin-bottom:6px}
+.results-table-subtitle{font-size:13px;color:var(--tm);margin-bottom:16px}
+.symbols-legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-family:var(--mo);font-size:11px;color:var(--td)}
+.legend-item{display:flex;align-items:center;gap:5px}
+.table-scroll{overflow-x:auto}
+.metrics-table{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mo)}
+.metrics-table th{background:rgba(79,195,247,.06);color:var(--a);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-bottom:1px solid var(--bs);text-align:left}
+.metrics-table td{padding:8px 12px;border-bottom:1px solid var(--bs);color:var(--tm)}
+.metrics-table tr:hover td{background:rgba(79,195,247,.03)}
+.metrics-table tr.highlighted td{background:rgba(79,195,247,.08);color:var(--t)}
+.results-table-caption{font-size:11px;color:var(--td);margin-top:10px;font-family:var(--mo)}
+
+/* EVALUATION */
+.results-overview{margin-bottom:16px}
+.results-intro{font-size:14px;color:var(--tm);line-height:1.75;max-width:800px}
+.metric-legend{font-size:13px;color:var(--td);text-align:center;margin:-10px 0 32px}
+.metric-legend strong{color:var(--tm)}
+
+/* Language / metric selectors */
+.eval-selectors{display:flex;justify-content:center;gap:40px;margin-bottom:30px;flex-wrap:wrap;align-items:center}
+.eval-selectors label{font-weight:600;font-size:13px;color:var(--tm);margin-right:8px;font-family:var(--mo);letter-spacing:.05em}
+.eval-selectors select{font-size:12px;padding:6px 14px;border-radius:5px;border:1px solid var(--bs);background:var(--nm);color:var(--t);font-family:var(--mo);outline:none;cursor:pointer}
+.eval-selectors select:focus{border-color:rgba(79,195,247,.4)}
+
+/* Charts */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.metric-card{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:20px;transition:border-color .2s}
+.metric-card:hover{border-color:rgba(79,195,247,.18)}
+.metric-card h3{font-size:14px;font-weight:700;color:var(--t);margin-bottom:14px}
+.chart-container{position:relative}
+.chart-container.large canvas{width:100%!important}
+.fullscreen-btn{position:absolute;top:4px;right:4px;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.2);color:var(--a);border-radius:4px;padding:3px 7px;font-size:11px;cursor:pointer;transition:all .2s}
+.fullscreen-btn:hover{background:rgba(79,195,247,.2)}
+.baseline-fullwidth{background:var(--card);border:1px solid var(--bs);border-radius:12px;padding:20px;margin-bottom:32px}
+.baseline-fullwidth h3{font-size:14px;font-weight:700;color:var(--t);margin-bottom:14px}
+
+/* Key findings */
+.key-findings{margin-top:8px}
+.key-findings h3{font-family:var(--sf);font-size:22px;color:var(--t);margin-bottom:20px}
+.findings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.finding-item{background:var(--card);border:1px solid var(--bs);border-radius:10px;padding:20px;transition:border-color .2s}
+.finding-item:hover{border-color:rgba(79,195,247,.18)}
+.finding-icon{width:36px;height:36px;border-radius:7px;background:rgba(79,195,247,.1);color:var(--a);border:1px solid rgba(79,195,247,.2);display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:12px}
+.finding-item:nth-child(2) .finding-icon{background:rgba(129,199,132,.1);color:var(--a2);border-color:rgba(129,199,132,.2)}
+.finding-item:nth-child(3) .finding-icon{background:rgba(255,183,77,.1);color:var(--a3);border-color:rgba(255,183,77,.2)}
+.finding-item:nth-child(4) .finding-icon{background:rgba(207,102,121,.1);color:var(--a4);border-color:rgba(207,102,121,.2)}
+.finding-item h4{font-size:13px;font-weight:700;color:var(--t);margin-bottom:6px}
+.finding-item p{font-size:12px;color:var(--tm);line-height:1.6}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--bs);padding:44px 48px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px}
+.fl h3{font-family:var(--sf);font-size:20px;margin-bottom:6px}
+.fl p{font-size:12px;color:var(--tm);line-height:1.8}
+.fl a{color:var(--a);text-decoration:none}
+.fl a:hover{text-decoration:underline}
+.fl sup{font-size:.65em}
+.fbadges{display:flex;gap:7px;flex-wrap:wrap;align-items:flex-start}
+.fb{font-family:var(--mo);font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:4px 9px;border-radius:3px;border:1px solid var(--bs);color:var(--td)}
+.footer-links-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.footer-links-row a{font-family:var(--mo);font-size:11px;color:var(--td);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+.footer-links-row a:hover{color:var(--a)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .65s ease both}
+.fd1{animation-delay:.08s}.fd2{animation-delay:.18s}.fd3{animation-delay:.3s}
+
+@media(max-width:860px){
+  nav.main-nav{padding:0 20px}.nav-links-list{display:none}
+  .hero,.sec{padding-left:20px;padding-right:20px}
+  .overview-grid,.control-grid,.audio-grid,.metrics-grid,.findings-grid{grid-template-columns:1fr}
+  footer{padding:32px 20px}
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <img src="cosyvoice2-logo-clear.png" alt="CosyVoice2 Logo" class="header-logo">
-                <!-- <h1 class="title">CosyVoice2 for European Languages</h1> -->
-                <p class="subtitle">Europeanizing CosyVoice2:<br>Data-Efficient Adaptation for French and German Zero-Shot TTS</p>
-                <div class="paper-info">
-                    <span class="conference">ICASSP 2026</span>
-                    <a href="https://2026.ieeeicassp.org/" class="paper-link" target="_blank" rel="noopener">
-                        <i class="fas fa-paper-plane"></i> Under Review
-                    </a>
-                </div>
-                <div class="resource-links">
-                    <div class="resource-category">
-                        <h3><i class="fas fa-toolbox"></i> Project Resources</h3>
-                        <div class="resource-grid">
-                            <a href="https://github.com/hi-paris/CosyVoice2-EU" class="resource-link github" target="_blank" rel="noopener">
-                                <i class="fab fa-github"></i>
-                                GitHub Repository
-                            </a>
-                            <a href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" class="resource-link hf-model" target="_blank" rel="noopener">
-                                <img class="hf-logo" src="https://huggingface.co/front/assets/huggingface_logo.svg" alt="Hugging Face" width="18" height="18" loading="lazy">
-                                Hugging Face Model
-                            </a>
-                            <a href="https://pypi.org/project/cosyvoice2-eu/" class="resource-link pypi" target="_blank" rel="noopener">
-                                <i class="fab fa-python"></i>
-                                PyPI Package
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <iframe allowfullscreen="allowfullscreen"
-                        allow="clipboard-write"
-                        scrolling="no"
-                        class="fp-iframe"
-                        src="https://heyzine.com/flip-book/638e6d8f87.html">
-                </iframe>
-            </div>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="logo">CosyVoice2 · EU</div>
+  <ul class="nav-links-list">
+    <li><a href="#overview" class="active">Overview</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#interactive-demo">Demo</a></li>
+    <li><a href="#evaluation">Results</a></li>
+  </ul>
+  <div class="nav-pill">ICASSP 2026 · Under Review</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="htag fu">French · German · Zero-Shot TTS · CosyVoice2</div>
+    <img src="cosyvoice2-logo-clear.png" alt="CosyVoice2 Logo" class="hero-logo fu fd1"
+         onerror="this.style.display='none'">
+    <h1 class="fu fd1">Europeanizing<br><em>CosyVoice2</em></h1>
+    <p class="hero-italic fu fd1">Data-Efficient Adaptation for French and German Zero-Shot TTS</p>
+    <p class="hero-sub fu fd2">A rigorous, reproducible ablation study fine-tuning key components of CosyVoice2 across data budgets and language regimes — setting a new standard for multilingual TTS research with backbone-agnostic LoRA adaptation.</p>
+    <div class="hero-badges fu fd2">
+      <a class="hbadge" href="https://github.com/hi-paris/CosyVoice2-EU" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+      <a class="hbadge hf" href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" target="_blank" rel="noopener">🤗 Hugging Face Model</a>
+      <a class="hbadge pypi" href="https://pypi.org/project/cosyvoice2-eu/" target="_blank" rel="noopener"><i class="fab fa-python"></i> PyPI Package</a>
+    </div>
+    <div class="hero-stats fu fd3">
+      <div><div class="stat-val">2<span>×</span></div><div class="stat-lbl">Languages</div></div>
+      <div><div class="stat-val"><span>FR</span>&amp;DE</div><div class="stat-lbl">French &amp; German</div></div>
+      <div><div class="stat-val">3<span>+</span></div><div class="stat-lbl">Components ablated</div></div>
+      <div><div class="stat-val"><span>0</span>-shot</div><div class="stat-lbl">Voice cloning</div></div>
+    </div>
+  </div>
+  <!-- Decorative waveform -->
+  <div style="position:absolute;right:-10px;top:0;bottom:0;width:42%;opacity:.18;pointer-events:none">
+    <svg width="100%" height="100%" viewBox="0 0 440 600" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="wg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4FC3F7" stop-opacity="1"/><stop offset="100%" stop-color="#4FC3F7" stop-opacity="0"/></linearGradient></defs>
+      <polyline points="0,300 20,268 40,322 60,252 80,288 100,232 120,310 140,248 160,300 180,224 200,272 220,192 240,264 260,204 280,288 300,212 320,272 340,232 360,296 380,252 400,284 420,240 440,302" fill="none" stroke="url(#wg3)" stroke-width="2"/>
+      <polyline points="0,310 20,336 40,288 60,342 80,312 100,362 120,288 140,352 160,302 180,372 200,322 220,402 240,332 260,392 280,308 300,382 320,322 340,362 360,298 380,342 400,306 420,346 440,296" fill="none" stroke="url(#wg3)" stroke-width="1.5" opacity=".35"/>
+      <circle cx="220" cy="192" r="4" fill="#4FC3F7" opacity=".9"/>
+      <circle cx="100" cy="232" r="3" fill="#81C784" opacity=".6"/>
+      <circle cx="300" cy="212" r="4" fill="#FFB74D" opacity=".8"/>
+    </svg>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- OVERVIEW -->
+<div class="sec" id="overview">
+  <div class="stag">Research Overview</div>
+  <h2>Component-level <em>adaptation</em></h2>
+  <p class="sec-intro">Systematic fine-tuning of CosyVoice2 for European languages — transparent, reproducible, and backbone-agnostic.</p>
+  <div class="overview-grid">
+    <div class="ov-card">
+      <div class="ov-ico"><i class="fas fa-globe-americas"></i></div>
+      <h3>Challenge</h3>
+      <p>While generative TTS excels in English and Chinese, high-quality, expressive synthesis for European languages like French and German is underexplored in open-source systems.</p>
+    </div>
+    <div class="ov-card">
+      <div class="ov-ico"><i class="fas fa-cogs"></i></div>
+      <h3>Methodology</h3>
+      <p>A rigorous, reproducible ablation grid fine-tuning key components of CosyVoice2 across data budgets and language regimes. Backbone-agnostic refactor unlocks plug-and-play LLMs and efficient LoRA adaptation.</p>
+    </div>
+    <div class="ov-card">
+      <div class="ov-ico"><i class="fas fa-chart-bar"></i></div>
+      <h3>Innovation</h3>
+      <p>One of the first systematic open, component-level benchmarks of adapting a modern generative TTS to European languages — enabling transparent reproduction, extension &amp; evaluation of cross-lingual voice + prosody cloning.</p>
+    </div>
+  </div>
+  <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe"
+    src="https://heyzine.com/flip-book/638e6d8f87.html">
+  </iframe>
+</div>
+
+<div class="div"></div>
+
+<!-- ARCHITECTURE -->
+<div class="sec" id="architecture">
+  <div class="stag">Architecture</div>
+  <h2>CosyVoice2 <em>pipeline</em></h2>
+  <p class="arch-intro">CosyVoice2 follows a modular three-stage TTS pipeline. Each component can be fine-tuned independently or in combination to adapt the model to European languages. Click on the components below to explore their role and impact on speech quality.</p>
+
+  <div class="arch-svg-wrap">
+    <svg class="architecture-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="archTitle archDesc">
+      <title id="archTitle">CosyVoice2 EU Adaptation Architecture</title>
+      <desc id="archDesc">Three-layer layout: middle generative pipeline; top speaker embedding conditioning; bottom reference audio, tokenizer and reference mel prompts.</desc>
+      <path class="arrow cond-arrow" d="M 145 395 L 145 70 L 410 70 L 420 70" marker-end="url(#arrowhead)"/>
+      <rect class="input-box" x="60" y="165" width="130" height="90" rx="10"/>
+      <text x="125" y="195" text-anchor="middle" class="component-text">Input Text</text>
+      <text x="125" y="210" text-anchor="middle" class="component-subtext">FR/DE Text</text>
+      <rect class="component-box slm-component" x="220" y="155" width="150" height="110" rx="14" data-component="slm"/>
+      <text x="295" y="185" text-anchor="middle" class="component-title">Text-Speech LM</text>
+      <text x="295" y="200" text-anchor="middle" class="component-subtitle">Text → Semantic Tokens</text>
+      <circle class="finetune-indicator slm-indicator" cx="360" cy="165" r="8"/>
+      <rect class="component-box flow-component" x="420" y="155" width="170" height="110" rx="14" data-component="flow"/>
+      <text x="505" y="180" text-anchor="middle" class="component-title">Flow Matching</text>
+      <text x="505" y="195" text-anchor="middle" class="component-subtitle">CFM Decoder</text>
+      <text x="505" y="210" text-anchor="middle" class="component-detail">Semantic → Mel</text>
+      <circle class="finetune-indicator flow-indicator" cx="580" cy="165" r="8"/>
+      <rect class="component-box hifigan-component" x="630" y="155" width="160" height="110" rx="14" data-component="hifigan"/>
+      <text x="710" y="180" text-anchor="middle" class="component-title">HiFi-GAN</text>
+      <text x="710" y="195" text-anchor="middle" class="component-subtitle">Vocoder (Frozen)</text>
+      <text x="710" y="210" text-anchor="middle" class="component-detail">Mel → Waveform</text>
+      <circle class="finetune-indicator hifigan-indicator" cx="785" cy="165" r="8"/>
+      <rect class="output-box" x="820" y="165" width="130" height="90" rx="10"/>
+      <text x="885" y="195" text-anchor="middle" class="component-text">Speech Output</text>
+      <text x="885" y="210" text-anchor="middle" class="component-subtext">🔊 Audio Output</text>
+      <path class="arrow" d="M 190 210 L 220 210" marker-end="url(#arrowhead)"/>
+      <path class="arrow" d="M 370 210 L 420 210" marker-end="url(#arrowhead)"/>
+      <path class="arrow" d="M 590 210 L 630 210" marker-end="url(#arrowhead)"/>
+      <path class="arrow" d="M 790 210 L 820 210" marker-end="url(#arrowhead)"/>
+      <rect class="component-box frozen-box" x="420" y="40" width="170" height="60" rx="10"/>
+      <text x="505" y="65" text-anchor="middle" class="component-title">Speaker Emb.</text>
+      <text x="505" y="80" text-anchor="middle" class="component-subtitle">CAM++ (Frozen)</text>
+      <path class="arrow cond-arrow" d="M 505 100 L 505 155" marker-end="url(#arrowhead)"/>
+      <rect class="component-box frozen-box" x="60" y="360" width="170" height="70" rx="10"/>
+      <text x="145" y="385" text-anchor="middle" class="component-title">Reference Audio</text>
+      <text x="145" y="400" text-anchor="middle" class="component-subtitle">Prompt Speaker</text>
+      <rect class="component-box frozen-box" x="270" y="300" width="170" height="70" rx="10"/>
+      <text x="355" y="315" text-anchor="middle" class="component-title">S3 Speech Tokenizer</text>
+      <text x="355" y="330" text-anchor="middle" class="component-subtitle">Semantic IDs (Frozen)</text>
+      <rect class="component-box frozen-box" x="610" y="360" width="170" height="70" rx="10"/>
+      <text x="695" y="385" text-anchor="middle" class="component-title">Reference Mel</text>
+      <text x="695" y="400" text-anchor="middle" class="component-subtitle">Acoustic Prompt</text>
+      <path class="arrow cond-arrow" d="M 230 395 L 270 375" marker-end="url(#arrowhead)"/>
+      <path class="arrow cond-arrow" d="M 230 395 Q 420 380 610 395" marker-end="url(#arrowhead)"/>
+      <path class="arrow cond-arrow" d="M 355 300 L 355 265" marker-end="url(#arrowhead)"/>
+      <path class="arrow cond-arrow" d="M 440 340 L 485 265" marker-end="url(#arrowhead)"/>
+      <path class="arrow cond-arrow" d="M 695 360 Q 640 310 590 265" marker-end="url(#arrowhead)"/>
+      <g class="legend" transform="translate(60, 470)">
+        <text x="0" y="0" class="legend-title">Legend:</text>
+        <circle cx="20" cy="25" r="8" class="finetune-indicator active" style="fill:rgba(79,195,247,.3);stroke:var(--a)"/>
+        <text x="35" y="30" class="legend-text">Fine-tuned Module</text>
+        <circle cx="220" cy="25" r="8" class="finetune-indicator inactive" style="fill:rgba(74,93,114,.2);stroke:rgba(74,93,114,.5)"/>
+        <text x="235" y="30" class="legend-text">Frozen Module</text>
+        <line x1="20" y1="50" x2="60" y2="50" class="arrow cond-arrow"/>
+        <text x="70" y="54" class="legend-text">Conditioning / Prompt</text>
+      </g>
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="rgba(79,195,247,.5)"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="component-info-panel">
+    <div class="info-content" id="info-content">
+      <h3>Select a Component</h3>
+      <p>Upper row: generative stages. Lower row: frozen prompt / conditioning path (semantic tokenizer, speaker embedding, reference mel). LM &amp; Flow are primary adaptation targets; HiFi-GAN stays frozen.</p>
+    </div>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- INTERACTIVE DEMO -->
+<div class="sec" id="interactive-demo">
+  <div class="stag">Interactive Demo</div>
+  <h2>Fine-tuning <em>configuration</em></h2>
+  <p class="sec-intro">Select components to hear progressive improvements. Compare the baseline against your chosen fine-tuning configuration.</p>
+
+  <div class="demo-text-section">
+    <h3>Sample Text</h3>
+    <div class="language-selector">
+      <div class="language-switch">
+        <input type="radio" id="lang-french" name="language" value="fr" checked>
+        <label for="lang-french" class="language-option"><span class="flag">🇫🇷</span><span class="lang-name" style="font-family:var(--mo);font-size:11px;letter-spacing:.06em">French</span></label>
+        <input type="radio" id="lang-german" name="language" value="de">
+        <label for="lang-german" class="language-option"><span class="flag">🇩🇪</span><span class="lang-name" style="font-family:var(--mo);font-size:11px;letter-spacing:.06em">German</span></label>
+      </div>
+    </div>
+    <div class="text-sample" id="sample-text">
+      "Bonjour, je m'appelle Luka et je travaille dans une entreprise de technologie à Paris.
+      Aujourd'hui, nous allons explorer les capacités de synthèse vocale en français avec CosyVoice 2."
+    </div>
+    <div class="prompt-inline">
+      <div class="prompt-inline-card">
+        <div class="prompt-inline-meta">
+          <i class="fas fa-microphone" aria-hidden="true"></i>
+          <span id="prompt-language-inline">French</span>
+          <small class="prompt-inline-note">reference voice</small>
         </div>
-    </header>
+        <audio controls class="audio-player prompt-player" id="prompt-audio-inline">
+          <source src="common_voice_fr_40952142.wav" type="audio/wav" id="prompt-source">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+  </div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="container">
-            <ul class="nav-links">
-                <li><a href="#overview" class="nav-link active">Overview</a></li>
-                <li><a href="#architecture" class="nav-link">Architecture</a></li>
-                <li><a href="#interactive-demo" class="nav-link">Interactive Demo</a></li>
-                <li><a href="#evaluation" class="nav-link">Evaluation Results</a></li>
-            </ul>
-        </div>
-    </nav>
+  <div class="finetuning-controls">
+    <h3>Fine-tuning Configuration</h3>
+    <div class="control-grid">
+      <div class="control-item">
+        <label class="control-label">
+          <input type="checkbox" id="slm-toggle" class="component-toggle" data-component="slm">
+          <span class="checkbox-custom"></span>
+          Text-Speech LM Fine-tuning
+        </label>
+        <p class="control-description">Improves semantic understanding and pronunciation patterns</p>
+      </div>
+      <div class="control-item">
+        <label class="control-label">
+          <input type="checkbox" id="flow-toggle" class="component-toggle" data-component="flow">
+          <span class="checkbox-custom"></span>
+          Flow Matching Fine-tuning
+        </label>
+        <p class="control-description">Enhances prosody and natural speech rhythm</p>
+      </div>
+      <div class="control-item">
+        <label class="control-label">
+          <input type="checkbox" id="hifigan-toggle" class="component-toggle" data-component="hifigan">
+          <span class="checkbox-custom"></span>
+          HiFi-GAN Fine-tuning*
+        </label>
+        <p class="control-description">Improves audio quality and reduces artifacts</p>
+      </div>
+    </div>
+  </div>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <!-- Overview Section -->
-            <section id="overview" class="section">
-                <h2 class="section-title">Research Overview</h2>
-                <div class="overview-grid">
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-globe-americas"></i>
-                        </div>
-                        <h3>Challenge</h3>
-                        <p>While generative TTS excels in English and Chinese, high-quality, expressive synthesis for European languages like French and German is an underexplored area in open-source systems. We address this gap with a systematic, component-level adaptation of CosyVoice2, a state-of-the-art TTS model.</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3>Methodology</h3>
-                        <p>We introduce a rigorous, reproducible ablation grid—fine-tuning key components of CosyVoice2 across data budgets and language regimes. Our backbone-agnostic refactor unlocks plug-and-play LLMs and efficient LoRA adaptation, setting a new standard for multilingual TTS research.</p>
-                    </div>
-                    <div class="overview-card">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3>Innovation</h3>
-                        <p>One of the first systematic open, component-level benchmarks of adapting a modern generative TTS (CosyVoice2) to European languages; enabling transparent reproduction, extension & evaluation of cross‑lingual voice + prosody cloning.</p>
-                    </div>
-                </div>
-            </section>
+  <div class="audio-grid">
+    <div class="audio-card baseline-card">
+      <h4><i class="fas fa-play-circle"></i> Baseline (No Fine-tuning)</h4>
+      <div class="quality-indicators">
+        <span class="quality-badge poor">Strong English Accent</span>
+        <span class="quality-badge poor">Unnatural Prosody</span>
+      </div>
+      <audio controls class="audio-player" data-config="baseline">
+        <source src="audio/original-fr.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+      <p class="audio-description">Original CosyVoice2 model without any language-specific training.</p>
+    </div>
+    <div class="audio-card dynamic-card" id="dynamic-audio-card">
+      <h4 id="dynamic-title"><i class="fas fa-magic"></i> Current Configuration</h4>
+      <div class="quality-indicators" id="dynamic-indicators">
+        <span class="quality-badge neutral">Select components to hear improvements</span>
+      </div>
+      <audio controls class="audio-player" id="dynamic-audio" data-config="dynamic">
+        <source src="audio/original-fr.wav" type="audio/wav" id="dynamic-source">
+        Your browser does not support the audio element.
+      </audio>
+      <p class="audio-description" id="dynamic-description">Select fine-tuning components above to hear the progressive improvements in speech quality.</p>
+    </div>
+  </div>
 
-            <!-- Architecture Section -->
-            <section id="architecture" class="section">
-                <h2 class="section-title">CosyVoice2 Architecture</h2>
-                
-                <div class="architecture-description">
-                    <p class="architecture-intro">
-                        CosyVoice2 follows a modular three-stage TTS pipeline. Each component can be fine-tuned independently 
-                        or in combination to adapt the model to European languages. Click on the components below to explore their role 
-                        and impact on the final speech quality.
-                    </p>
-                </div>
+  <div class="research-notes">
+    <div class="footnote">
+      <span class="footnote-marker">*</span>
+      <span class="footnote-text">
+        <strong>Note on HiFi-GAN Training:</strong> The "original" HiFi-GAN here uses a partially trained vocoder, while "fine-tuned" represents the official CosyVoice2 HiFi-GAN model.
+        By doing so, we aim to showcase the effect of the vocoder on speech quality, as typically
+        <a href="https://github.com/FunAudioLLM/CosyVoice/issues/1349#issuecomment-2942786544" target="_blank" class="inline-link">no additional HiFi-GAN training is needed</a>
+        for cross-lingual adaptation.
+      </span>
+    </div>
+  </div>
 
-                <!-- Architecture Diagram -->
-                <div class="architecture-diagram-container">
-                    <svg class="architecture-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="archTitle archDesc">
-                        <title id="archTitle">CosyVoice2 EU Adaptation Architecture</title>
-                        <desc id="archDesc">Three-layer layout: middle generative pipeline (Input → LM → Flow Matching → HiFi-GAN → Output); top speaker embedding conditioning; bottom reference audio, tokenizer & reference mel prompts into LM / Flow.</desc>
-                        <!-- Reference Audio → Speaker Embedding conditioning path (placed early so it renders behind LM/Flow) -->
-                        <path class="arrow cond-arrow" d="M 145 395 L 145 70 L 410 70 L 420 70" marker-end="url(#arrowhead)"/>
-                        <!-- Text Input -->
-                        <!-- GENERATIVE PIPELINE (Middle Layer) -->
-                        <rect class="input-box" x="60" y="165" width="130" height="90" rx="10"/>
-                        <text x="125" y="195" text-anchor="middle" class="component-text">Input Text</text>
-                        <text x="125" y="210" text-anchor="middle" class="component-subtext">FR/DE Text</text>
-                        <!-- Text → Semantic (LM) -->
-                        <rect class="component-box slm-component" x="220" y="155" width="150" height="110" rx="14" data-component="slm"/>
-                        <text x="295" y="185" text-anchor="middle" class="component-title">Text-Speech LM</text>
-                        <text x="295" y="200" text-anchor="middle" class="component-subtitle">Text → Semantic Tokens</text>
-                        <circle class="finetune-indicator slm-indicator" cx="360" cy="165" r="8"/>
-                        <!-- Flow Matching -->
-                        <rect class="component-box flow-component" x="420" y="155" width="170" height="110" rx="14" data-component="flow"/>
-                        <text x="505" y="180" text-anchor="middle" class="component-title">Flow Matching</text>
-                        <text x="505" y="195" text-anchor="middle" class="component-subtitle">CFM Decoder</text>
-                        <text x="505" y="210" text-anchor="middle" class="component-detail">Semantic → Mel</text>
-                        <circle class="finetune-indicator flow-indicator" cx="580" cy="165" r="8"/>
-                        <!-- HiFi-GAN -->
-                        <rect class="component-box hifigan-component" x="630" y="155" width="160" height="110" rx="14" data-component="hifigan"/>
-                        <text x="710" y="180" text-anchor="middle" class="component-title">HiFi-GAN</text>
-                        <text x="710" y="195" text-anchor="middle" class="component-subtitle">Vocoder (Frozen)</text>
-                        <text x="710" y="210" text-anchor="middle" class="component-detail">Mel → Waveform</text>
-                        <circle class="finetune-indicator hifigan-indicator" cx="785" cy="165" r="8"/>
-                        <!-- Output -->
-                        <rect class="output-box" x="820" y="165" width="130" height="90" rx="10"/>
-                        <text x="885" y="195" text-anchor="middle" class="component-text">Speech Output</text>
-                        <text x="885" y="210" text-anchor="middle" class="component-subtext">🔊 Audio Output</text>
-                        <!-- Forward arrows (solid) -->
-                        <path class="arrow" d="M 190 210 L 220 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 370 210 L 420 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 590 210 L 630 210" marker-end="url(#arrowhead)"/>
-                        <path class="arrow" d="M 790 210 L 820 210" marker-end="url(#arrowhead)"/>
-                        
-                        <!-- TOP CONDITIONING (Speaker Embedding) -->
-                        <rect class="component-box frozen-box" x="420" y="40" width="170" height="60" rx="10"/>
-                        <text x="505" y="65" text-anchor="middle" class="component-title">Speaker Emb.</text>
-                        <text x="505" y="80" text-anchor="middle" class="component-subtitle">CAM++ (Frozen)</text>
-                        <!-- Speaker Embedding to Flow -->
-                        <path class="arrow cond-arrow" d="M 505 100 L 505 155" marker-end="url(#arrowhead)"/>
+  <div id="config-results" class="results-table-card" style="display:none"><!-- populated by script.js --></div>
+  <div id="config-results">
+    <h3 class="results-table-title">See how these configurations compare quantitatively</h3>
+    <p class="results-table-subtitle">Rows map to your selections above (Text-Speech LM, Flow, HiFi-GAN). We highlight the matching row automatically.</p>
+    <div class="symbols-legend" aria-label="Legend for symbols">
+      <span class="legend-item"><span class="legend-swatch">◦</span> original (unchanged)</span>
+      <span class="legend-item"><span class="legend-swatch">⊕</span> fine-tuned</span>
+      <span class="legend-item"><span class="legend-swatch">⊖</span> partially trained</span>
+    </div>
+    <div class="table-scroll">
+      <table id="config-table" class="metrics-table" aria-describedby="config-table-caption">
+        <!-- populated by script.js -->
+      </table>
+    </div>
+    <p id="config-table-caption" class="results-table-caption">Metrics: WER↓ (intelligibility), SECS↑ (speaker similarity), MCD↓ (distortion). Column emphasis follows the selected language.</p>
+  </div>
+</div>
 
-                        <!-- BOTTOM CONDITIONING (Prompts) -->
-                        <rect class="component-box frozen-box" x="60" y="360" width="170" height="70" rx="10"/>
-                        <text x="145" y="385" text-anchor="middle" class="component-title">Reference Audio</text>
-                        <text x="145" y="400" text-anchor="middle" class="component-subtitle">Prompt Speaker</text>
-                        <rect class="component-box frozen-box" x="270" y="300" width="170" height="70" rx="10"/>
-                        <text x="355" y="315" text-anchor="middle" class="component-title">S3 Speech Tokenizer</text>
-                        <text x="355" y="330" text-anchor="middle" class="component-subtitle">Semantic IDs (Frozen)</text>
-                        <rect class="component-box frozen-box" x="610" y="360" width="170" height="70" rx="10"/>
-                        <text x="695" y="385" text-anchor="middle" class="component-title">Reference Mel</text>
-                        <text x="695" y="400" text-anchor="middle" class="component-subtitle">Acoustic Prompt</text>
-                        <!-- Fan-out from Reference Audio -->
-                        <path class="arrow cond-arrow" d="M 230 395 L 270 375" marker-end="url(#arrowhead)"/>
-                        <path class="arrow cond-arrow" d="M 230 395 Q 420 380 610 395" marker-end="url(#arrowhead)"/>
-                        <!-- Tokenizer to LM (vertical) -->
-                        <path class="arrow cond-arrow" d="M 355 300 L 355 265" marker-end="url(#arrowhead)"/>
-                        <!-- Tokenizer to Flow (diagonal) -->
-                        <path class="arrow cond-arrow" d="M 440 340 L 485 265" marker-end="url(#arrowhead)"/>
-                        <!-- Reference Mel to Flow -->
-                        <path class="arrow cond-arrow" d="M 695 360 Q 640 310 590 265" marker-end="url(#arrowhead)"/>
-                        
-                        <!-- (Optional) subtle horizontal separators (commented out) -->
-                        <!-- <line x1="40" y1="145" x2="960" y2="145" stroke="#e2e8f0" stroke-dasharray="4 6"/> -->
-                        <!-- <line x1="40" y1="340" x2="960" y2="340" stroke="#e2e8f0" stroke-dasharray="4 6"/> -->
-                        
-                        <!-- Fine-tuning Legend (moved lower) -->
-                        <g class="legend" transform="translate(60, 470)">
-                            <text x="0" y="0" class="legend-title">Legend:</text>
-                            <circle cx="20" cy="25" r="8" class="finetune-indicator active" style="fill:#10b981;stroke:#059669;"/>
-                            <text x="35" y="30" class="legend-text">Fine‑tuned Module</text>
-                            <circle cx="220" cy="25" r="8" class="finetune-indicator inactive"/>
-                            <text x="235" y="30" class="legend-text">Frozen Module</text>
-                            <line x1="20" y1="50" x2="60" y2="50" class="arrow cond-arrow"/>
-                            <text x="70" y="54" class="legend-text">Conditioning / Prompt</text>
-                        </g>
-                        
-                        <!-- Arrow marker definition -->
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                                    refX="10" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
-                            </marker>
-                        </defs>
-                    </svg>
-                </div>
+<div class="div"></div>
 
-                <!-- Component Information Panel -->
-                <div class="component-info-panel">
-                    <div class="info-content" id="info-content">
-                        <h3>Select a Component</h3>
-                        <p>Upper row: generative stages. Lower row: frozen prompt / conditioning path (semantic tokenizer, speaker embedding, reference mel). LM & Flow are primary adaptation targets; HiFi-GAN stays frozen.</p>
-                    </div>
-                </div>
-            </section>
+<!-- EVALUATION -->
+<div class="sec" id="evaluation">
+  <div class="stag">Evaluation Results</div>
+  <h2>Quantitative <em>benchmarks</em></h2>
+  <div class="results-overview">
+    <p class="results-intro">Evaluation across intelligibility (WER↓), speaker similarity (SECS↑), spectral distortion (MCD↓), pitch correlation (F0 Corr↑), and voicing error (V/UV↓). Most WER gains stem from LM fine-tuning; Flow refines prosody; HiFi-GAN stays robust frozen.</p>
+  </div>
+  <p class="metric-legend"><strong>Metric Directions:</strong> WER / MCD / V/UV ↓ &nbsp;·&nbsp; SECS / F0 Corr ↑</p>
 
-            <!-- Interactive Demo Section -->
-            <section id="interactive-demo" class="section">
-                <h2 class="section-title">Interactive Fine-tuning Demo</h2>
-                
-                <!-- Sample Text -->
-                <div class="demo-text-section">
-                    <h3>Sample Text</h3>
-                    
-                    <!-- Language Selector -->
-                    <div class="language-selector">
-                        <div class="language-switch">
-                            <input type="radio" id="lang-french" name="language" value="fr" checked>
-                            <label for="lang-french" class="language-option">
-                                <span class="flag">🇫🇷</span>
-                                <span class="lang-name">French</span>
-                            </label>
-                            <input type="radio" id="lang-german" name="language" value="de">
-                            <label for="lang-german" class="language-option">
-                                <span class="flag">🇩🇪</span>
-                                <span class="lang-name">German</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="text-sample" id="sample-text">
-                        "Bonjour, je m'appelle Luka et je travaille dans une entreprise de technologie à Paris.
-                        Aujourd'hui, nous allons explorer les capacités de synthèse vocale en français avec CosyVoice 2."
-                    </div>
-                                    <!-- Inline Prompt (subtle) -->
-                                    <div class="prompt-inline">
-                                        <div class="prompt-inline-card">
-                                            <div class="prompt-inline-meta">
-                                                <i class="fas fa-microphone" aria-hidden="true"></i>
-                                                <span id="prompt-language-inline">French</span>
-                                                <small class="prompt-inline-note">reference voice</small>
-                                            </div>
-                                            <audio controls class="audio-player prompt-player" id="prompt-audio-inline">
-                                                <source src="common_voice_fr_40952142.wav" type="audio/wav" id="prompt-source">
-                                                Your browser does not support the audio element.
-                                            </audio>
-                                        </div>
-                                    </div>
-                </div>
+  <div class="eval-selectors">
+    <div style="display:flex;align-items:center">
+      <label for="eval-language-select">Language:</label>
+      <select id="eval-language-select">
+        <option value="fr">🇫🇷 French</option>
+        <option value="de">🇩🇪 German</option>
+      </select>
+    </div>
+    <div style="display:flex;align-items:center">
+      <label for="metric-select">Metric:</label>
+      <select id="metric-select">
+        <option value="wer_norm" selected>Word Error Rate (normalized)</option>
+        <option value="secs">Speaker Similarity</option>
+        <option value="mcd">Mel Cepstral Distortion (MCD)</option>
+        <option value="f0_corr">F0 Correlation</option>
+        <option value="vuv">Voiced/Unvoiced Error (V/UV)</option>
+      </select>
+    </div>
+  </div>
 
-                <!-- Fine-tuning Controls -->
-                <div class="finetuning-controls">
-                    <h3>Fine-tuning Configuration</h3>
-                    <div class="control-grid">
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="slm-toggle" class="component-toggle" data-component="slm">
-                                <span class="checkbox-custom"></span>
-                                Text-Speech LM Fine-tuning
-                            </label>
-                            <p class="control-description">Improves semantic understanding and pronunciation patterns</p>
-                        </div>
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="flow-toggle" class="component-toggle" data-component="flow">
-                                <span class="checkbox-custom"></span>
-                                Flow Matching Fine-tuning
-                            </label>
-                            <p class="control-description">Enhances prosody and natural speech rhythm</p>
-                        </div>
-                        <div class="control-item">
-                            <label class="control-label">
-                                <input type="checkbox" id="hifigan-toggle" class="component-toggle" data-component="hifigan">
-                                <span class="checkbox-custom"></span>
-                                HiFi-GAN Fine-tuning*
-                            </label>
-                            <p class="control-description">Improves audio quality and reduces artifacts</p>
-                        </div>
-                    </div>
-                </div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <h3>Component Comparison</h3>
+      <div class="chart-container large">
+        <canvas id="radar-chart" width="520" height="380"></canvas>
+        <button class="fullscreen-btn" data-chart="radar-chart">⛶</button>
+      </div>
+    </div>
+    <div class="metric-card">
+      <h3>Learning Curve</h3>
+      <div class="chart-container">
+        <canvas id="learning-curve-chart" width="400" height="300"></canvas>
+        <button class="fullscreen-btn" data-chart="learning-curve-chart">⛶</button>
+      </div>
+    </div>
+    <div class="metric-card">
+      <h3>Mix vs Mono Training</h3>
+      <div class="chart-container">
+        <canvas id="mix-mono-curve-chart" width="400" height="300"></canvas>
+        <button class="fullscreen-btn" data-chart="mix-mono-curve-chart">⛶</button>
+      </div>
+    </div>
+  </div>
 
-                <!-- prompt section moved above (inline with sample text) -->
+  <div class="baseline-fullwidth">
+    <h3>Baseline vs Best Model (anchored by min WER_norm)</h3>
+    <div class="chart-container large">
+      <canvas id="baseline-chart" width="800" height="400"></canvas>
+      <button class="fullscreen-btn" data-chart="baseline-chart">⛶</button>
+    </div>
+  </div>
 
-                <!-- Audio Comparison Grid -->
-                <div class="audio-grid">
-                    <div class="audio-card baseline-card">
-                        <h4><i class="fas fa-play-circle"></i> Baseline (No Fine-tuning)</h4>
-                        <div class="quality-indicators">
-                            <span class="quality-badge poor">Strong English Accent</span>
-                            <span class="quality-badge poor">Unnatural Prosody</span>
-                        </div>
-                        <audio controls class="audio-player" data-config="baseline">
-                            <source src="audio/original-fr.wav" type="audio/wav">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <p class="audio-description">Original CosyVoice2 model without any language-specific training.</p>
-                    </div>
+  <div class="key-findings">
+    <div class="stag" style="margin-bottom:16px">Key Findings</div>
+    <div class="findings-grid">
+      <div class="finding-item">
+        <div class="finding-icon"><i class="fas fa-trophy"></i></div>
+        <h4>Most Impactful Component</h4>
+        <p>The text-speech language model is the key driver of quality, capturing linguistic rhythm and phrasing essential for intelligibility and natural prosody. Flow fine-tuning further improves continuity and expressiveness.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon"><i class="fas fa-database"></i></div>
+        <h4>Data Scaling &amp; Efficiency</h4>
+        <p>Most gains arise within ~100–500 monolingual hours. WER plateaus early under current data scale; SECS continues modest upward trend reflecting prosody refinement.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon"><i class="fas fa-layer-group"></i></div>
+        <h4>Component Synergy &amp; Practical Recipe</h4>
+        <p>Fine-tune the LM for immediate gains; add flow adaptation for enhanced prosody if resources allow. Vocoder and tokenizer can remain frozen — streamlining adaptation for new languages.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon"><i class="fas fa-exchange-alt"></i></div>
+        <h4>Cross-lingual Training Effects</h4>
+        <p>Bilingual training consistently boosts SECS; WER benefits appear at very low &amp; high scales, neutral mid-scale — indicating cross-lingual style regularization.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-icon"><i class="fas fa-lightbulb"></i></div>
+        <h4>Limitations &amp; Future Directions</h4>
+        <p>Limitations: frozen speech tokenizer; moderate data size. Future: tokenizer adaptation, larger corpora, backbone swaps, instruction-tuned prosody prompts.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-                    <div class="audio-card dynamic-card" id="dynamic-audio-card">
-                        <h4 id="dynamic-title"><i class="fas fa-magic"></i> Current Configuration</h4>
-                        <div class="quality-indicators" id="dynamic-indicators">
-                            <span class="quality-badge neutral">Select components to hear improvements</span>
-                        </div>
-                        <audio controls class="audio-player" id="dynamic-audio" data-config="dynamic">
-                            <source src="audio/original-fr.wav" type="audio/wav" id="dynamic-source">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <p class="audio-description" id="dynamic-description">
-                            Select fine-tuning components above to hear the progressive improvements in speech quality.
-                        </p>
-                    </div>
-                </div>
+<div class="div"></div>
 
-                <!-- Research Notes -->
-                <div class="research-notes">
-                    <div class="footnote">
-                        <span class="footnote-marker">*</span>
-                        <span class="footnote-text">
-                            <strong>Note on HiFi-GAN Training:</strong> The "original" HiFi-GAN here uses a partially trained vocoder, while "fine-tuned" represents the official CosyVoice2 HiFi-GAN model. 
-                            By doing so, we aim to showcase the effect of the vocoder on speech quality, as typically 
-                            <a href="https://github.com/FunAudioLLM/CosyVoice/issues/1349#issuecomment-2942786544" target="_blank" class="inline-link">no additional HiFi-GAN training is needed</a> 
-                            for cross-lingual adaptation.
-                        </span>
-                    </div>
-                </div>
+<!-- FOOTER -->
+<footer>
+  <div class="fl">
+    <h3>CosyVoice2 · EU Adaptation</h3>
+    <p>
+      <a href="https://horstmann.tech/" target="_blank">Tim Luka Horstmann</a><sup>1,2</sup>,
+      <a href="https://www.linkedin.com/in/nassimaouldouali" target="_blank">Nassima Ould Ouali</a><sup>1</sup>,
+      Amine Mohamed Arous<sup>3</sup>,<br>
+      Awais Hussain Sani<sup>2</sup>,
+      <a href="https://en.wikipedia.org/wiki/%C3%89ric_Moulines" target="_blank">Eric Moulines</a><sup>1</sup>
+    </p>
+    <p style="margin-top:4px;color:var(--td);font-size:11px">
+      <sup>1</sup> École Polytechnique &nbsp;|&nbsp; <sup>2</sup> Hi! PARIS &nbsp;|&nbsp; <sup>3</sup> ENSTA Paris
+    </p>
+    <div class="footer-links-row">
+      <a href="https://github.com/hi-paris/CosyVoice2-EU" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="mailto:nassima.ould-ouali@ip-paris.fr"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" target="_blank">🤗 Model</a>
+      <a href="https://pypi.org/project/cosyvoice2-eu/" target="_blank"><i class="fab fa-python"></i> PyPI</a>
+    </div>
+  </div>
+  <div class="fbadges">
+    <span class="fb">CosyVoice2</span>
+    <span class="fb">LoRA</span>
+    <span class="fb">French</span>
+    <span class="fb">German</span>
+    <span class="fb">Zero-Shot TTS</span>
+    <span class="fb">ICASSP 2026</span>
+  </div>
+</footer>
 
-                <!-- Interactive Results Table (below HiFi-GAN footnote) -->
-                <div id="config-results" class="results-table-card">
-                    <h3 class="results-table-title">See how these configurations compare quantitatively on our test data</h3>
-                    <p class="results-table-subtitle">Rows map to your selections above (Text‑Speech LM, Flow, HiFi‑GAN). We highlight the matching row automatically.</p>
-
-                    <div class="symbols-legend" aria-label="Legend for symbols">
-                        <span class="legend-item"><span class="legend-swatch legend-circle" aria-hidden="true">◦</span> original (unchanged)</span>
-                        <span class="legend-item"><span class="legend-swatch legend-plus" aria-hidden="true">⊕</span> fine‑tuned</span>
-                        <span class="legend-item"><span class="legend-swatch legend-minus" aria-hidden="true">⊖</span> partially trained</span>
-                    </div>
-
-                    <div class="table-scroll">
-                        <table id="config-table" class="metrics-table" aria-describedby="config-table-caption">
-                            <!-- populated by script.js -->
-                        </table>
-                    </div>
-                    <p id="config-table-caption" class="results-table-caption">Metrics: WER↓ (intelligibility), SECS↑ (speaker similarity), MCD↓ (distortion). Column emphasis follows the selected language.</p>
-                </div>
-            </section>
-
-            <!-- Evaluation Results Section -->
-            <section id="evaluation" class="section">
-                <h2 class="section-title">Evaluation Results</h2>
-                
-                <!-- Results Overview -->
-                <div class="results-overview">
-                    <p class="results-intro">
-                        Evaluation across intelligibility (WER↓), speaker similarity (SECS↑), spectral distortion (MCD↓), pitch correlation (F0 Corr↑), and voicing error (V/UV↓). Most WER gains stem from LM fine‑tuning; Flow refines prosody; HiFi-GAN stays robust frozen.
-                    </p>
-                </div>
-                <div class="metric-legend" style="text-align:center;margin:-20px 0 40px 0;font-size:0.9rem;">
-                    <strong>Metric Directions:</strong> WER / MCD / V/UV ↓; SECS / F0 Corr ↑.
-                </div>
-
-                <!-- Language and Metric Selectors -->
-                <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
-                    <!-- Language Selector for Evaluation -->
-                    <div style="display: flex; align-items: center;">
-                        <label for="eval-language-select" style="font-weight:600; font-size:1.1em; margin-right:10px;">Language:</label>
-                        <select id="eval-language-select" style="font-size:1em; padding:6px 16px; border-radius:8px; border:1px solid #e2e8f0;">
-                            <option value="fr">🇫🇷 French</option>
-                            <option value="de">🇩🇪 German</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Metric Selector -->
-                    <div style="display: flex; align-items: center;">
-                        <label for="metric-select" style="font-weight:600; font-size:1.1em; margin-right:10px;">Metric:</label>
-                        <select id="metric-select" style="font-size:1em; padding:6px 16px; border-radius:8px; border:1px solid #e2e8f0;">
-                            <option value="wer_norm" selected>Word Error Rate (normalized)</option>
-                            <option value="secs">Speaker Similarity</option>
-                            <option value="mcd">Mel Cepstral Distortion (MCD)</option>
-                            <option value="f0_corr">F0 Correlation</option>
-                            <option value="vuv">Voiced/Unvoiced Error (V/UV)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Metrics Grid -->
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <h3>Component Comparison</h3>
-                        <div class="chart-container large">
-                            <canvas id="radar-chart" width="520" height="380"></canvas>
-                            <button class="fullscreen-btn" data-chart="radar-chart">⛶</button>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Learning Curve</h3>
-                        <div class="chart-container">
-                            <canvas id="learning-curve-chart" width="400" height="300"></canvas>
-                            <button class="fullscreen-btn" data-chart="learning-curve-chart">⛶</button>
-                        </div>
-                    </div>
-                    <div class="metric-card">
-                        <h3>Mix vs Mono Training (across hours)</h3>
-                        <div class="chart-container">
-                            <canvas id="mix-mono-curve-chart" width="400" height="300"></canvas>
-                            <button class="fullscreen-btn" data-chart="mix-mono-curve-chart">⛶</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Baseline vs Best Model Full Width -->
-                <div class="baseline-fullwidth">
-                    <h3>Baseline vs Best Model (anchored by min WER_norm)</h3>
-                    <div class="chart-container large">
-                        <canvas id="baseline-chart" width="800" height="400"></canvas>
-                        <button class="fullscreen-btn" data-chart="baseline-chart">⛶</button>
-                    </div>
-                </div>
-
-                <!-- Key Findings -->
-                <div class="key-findings">
-                    <h3>Key Findings</h3>
-                    <div class="findings-grid">
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <h4>Most Impactful Component</h4>
-                            <p>The text-speech language model is the key driver of quality, capturing linguistic rhythm and phrasing essential for intelligibility and natural prosody. Flow fine-tuning further improves continuity and expressiveness, while the vocoder is robust and rarely a bottleneck for cross-lingual adaptation.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <h4>Data Scaling & Efficiency</h4>
-                            <p>Most gains arise within ~100–500 monolingual hours (≈ total 200–1000 in bilingual). WER plateaus early under current data scale; SECS continues modest upward trend reflecting prosody refinement.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <h4>Component Synergy & Practical Recipe</h4>
-                            <p>Fine-tune the LM for immediate gains; add flow adaptation for enhanced prosody if resources allow. Vocoder and tokenizer can remain frozen. This modular strategy streamlines adaptation for new languages and domains.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-exchange-alt"></i>
-                            </div>
-                            <h4>Cross-lingual Training Effects</h4>
-                            <p>Bilingual training consistently boosts SECS; WER benefits appear at very low & high scales, neutral mid-scale—indicating cross-lingual style regularization.</p>
-                        </div>
-                        <div class="finding-item">
-                            <div class="finding-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h4>Limitations & Future Directions</h4>
-                            <p>Limitations: frozen speech tokenizer; moderate data size. Future: tokenizer adaptation, larger corpora, backbone swaps, instruction-tuned prosody prompts.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <p class="authors">
-                        <strong>Researchers:</strong> 
-                        <span class="author-highlight">Tim Luka Horstmann<sup>1,2</sup></span>,
-                        <span class="author">Nassima Ould Ouali<sup>1</sup></span>, 
-                        <span class="author">Amine Mohamed Arous<sup>3</sup></span>, <br>
-                        <span class="author">Awais Hussain Sani<sup>2</sup></span>,
-                        <a href="https://en.wikipedia.org/wiki/%C3%89ric_Moulines" class="author-highlight">Eric Moulines<sup>1</sup></a>
-                    </p>
-                    <p class="affiliations">
-                        <!-- add superscripts -->
-                        École Polytechnique<sup>1</sup>, Hi! PARIS Research Center<sup>2</sup>, ENSTA Paris<sup>3</sup>
-                    </p>
-                    <p class="affiliations">Model: <a href="https://huggingface.co/hi-paris/CosyVoice2-0.5B-EU" target="_blank" class="inline-link">Hugging Face</a> · Package: <a href="https://pypi.org/project/cosyvoice2-eu/" target="_blank" class="inline-link">PyPI</a></p>
-                    <p class="copyright">&copy; 2025.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="https://github.com/hi-paris/CosyVoice2-EU" class="footer-link">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:nassima.ould-ouali@ip-paris.fr" class="footer-link">
-                        <i class="fas fa-envelope"></i> Contact
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
